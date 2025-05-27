@@ -10,7 +10,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 # 프롬프트 최적화 엔진 임포트
-from src.services.prompt_optimizer.optimizer import PromptOptimizer
+from src.services.optimizer import PromptOptimizer
 
 # 로깅 설정
 logging.basicConfig(
@@ -24,7 +24,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Flask 앱 초기화
-app = Flask(__name__, static_folder='backend/static')
+app = Flask(__name__, static_folder='static') # Path relative to backend/
 CORS(app)  # CORS 설정
 
 # 프롬프트 최적화 엔진 초기화

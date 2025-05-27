@@ -7,9 +7,9 @@ import importlib
 import os
 import re
 
-from .analyzers.input_analyzer import InputAnalyzer
-from .analyzers.intent_detector import IntentDetector
-from .models.base_model import BaseModel
+from ..utils.input_analyzer import InputAnalyzer
+from ..utils.intent_detector import IntentDetector
+from ..models.base_model import BaseModel
 
 class PromptOptimizer:
     """
@@ -43,12 +43,14 @@ class PromptOptimizer:
         """지정된 디렉토리에서 모델을 로드합니다."""
         try:
             # 모듈 경로 생성
-            module_path = f'.models.{directory}'
+            module_path = f'..models.{directory}'
             
             # 디렉토리 내 모든 Python 파일 가져오기
-            module_dir = os.path.join(os.path.dirname(__file__), 'models', directory)
+            # __file__ is optimizer.py, so dirname is services. '..' goes to src, then 'models'
+            module_dir = os.path.join(os.path.dirname(__file__), '..', 'models', directory)
             
             if not os.path.exists(module_dir):
+                print(f"Model directory not found: {module_dir}") # Added a print for debugging
                 return
             
             for filename in os.listdir(module_dir):
