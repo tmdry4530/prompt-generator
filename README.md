@@ -1,89 +1,289 @@
-# AI 프롬프트 최적화 도구
+# Model Optimization Prompt Generator
 
-## 프로젝트 개요
+**AI 모델별로 최적화된 프롬프트를 생성하는 웹 애플리케이션**
 
-AI 프롬프트 최적화 웹 도구는 다양한 AI 모델(텍스트, 이미지, 비디오, 음악)에 최적화된 고품질 프롬프트를 생성하는 웹 애플리케이션입니다. 이 도구는 사용자가 기본 요청을 입력하면 선택한 AI 모델에 맞게 최적화된 프롬프트를 제공합니다.
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Python](https://img.shields.io/badge/python-3.8+-green.svg)
+![React](https://img.shields.io/badge/react-18.0+-blue.svg)
+![Flask](https://img.shields.io/badge/flask-3.0+-red.svg)
 
-## 주요 개선 사항
+## 🎯 프로젝트 개요
 
-### 1. 구조적 개선
+Model Optimization Prompt Generator는 GPT-4, Claude-3, Llama-2, Gemini Pro 등 다양한 AI 모델의 특성에 맞게 프롬프트를 최적화하여 더 나은 AI 응답을 얻을 수 있도록 도와주는 웹 애플리케이션입니다.
 
-- **표준화된 디렉토리 구조**: 프로젝트를 `frontend`, `backend`, `docs` 세 개의 주요 디렉토리로 명확하게 분리
-- **일관된 하위 디렉토리 체계**: 각 주요 디렉토리 내에 일관된 하위 디렉토리 구조 적용
-  - Frontend: `src/{components, utils, hooks, styles, types}`
-  - Backend: `src/{services, models, routes, utils, middlewares}`
-  - Docs: `{api, user-guide, development}`
+### ✨ 주요 기능
 
-### 2. 네트워크 오류 해결
+- **🤖 다중 모델 지원**: GPT-4, Claude-3, Llama-2, Gemini Pro
+- **🎨 모델별 최적화**: 각 모델의 특성에 맞춘 프롬프트 구조 적용
+- **📝 템플릿 라이브러리**: 코드 생성, 분석, 글쓰기, 요약 등 다양한 템플릿
+- **📊 사용 통계**: 모델별 사용 현황 및 인기 템플릿 분석
+- **💾 히스토리 관리**: 생성된 프롬프트 자동 저장 및 재사용
+- **📋 원클릭 복사**: 최적화된 프롬프트 쉬운 복사
 
-- **API 엔드포인트 환경변수화**: 하드코딩된 `localhost:5000` API 주소를 환경변수 기반으로 변경
-- **환경별 API 주소 자동 설정**: 개발 환경에서는 로컬 API, 프로덕션 환경에서는 현재 호스트 기반 API 사용
-- **모든 API 호출 통일**: `getApiUrl()` 유틸리티 함수를 통한 일관된 API 호출 방식 구현
+## 🚀 빠른 시작
 
-### 3. 환경 설정 개선
+### 필수 요구사항
 
-- **환경별 설정 파일 분리**: 개발 및 프로덕션 환경에 대한 별도 `.env` 파일 구성
-- **환경 변수 유효성 검사**: 필수 환경 변수 누락 시 경고 및 기본값 사용 로직 구현
-- **타입 안전성 강화**: 환경 변수 타입 선언 및 타입스크립트 통합
+- **Python 3.8+**
+- **Node.js 16+**
+- **PowerShell 7.x** (Windows)
 
-### 4. 모델 카테고리 구조 개선
+### 1️⃣ 저장소 클론
 
-- **카테고리별 모델 분류**: 텍스트, 이미지, 비디오, 음악 카테고리로 모델 명확하게 분류
-- **UI 탭 인터페이스**: 카테고리별 탭 UI로 직관적인 모델 선택 경험 제공
-- **카테고리별 입력 폼 최적화**: 각 카테고리에 맞는 입력 폼과 안내 텍스트 제공
-
-### 5. 코드 품질 개선
-
-- **타입 안전성 강화**: TypeScript 타입 선언 및 인터페이스 보강
-- **컴포넌트 구조화**: UI 컴포넌트 분리 및 재사용성 향상
-- **유틸리티 함수 모듈화**: 공통 기능을 유틸리티 함수로 분리하여 코드 중복 제거
-
-## 기술 스택
-
-- **프론트엔드**: React, TypeScript, Vite, TailwindCSS
-- **백엔드**: Flask, Python
-- **환경 관리**: 환경변수 기반 설정
-- **배포**: 정적 웹사이트 배포
-
-## 디렉토리 구조
-
-```
-ai-prompt-optimizer-restructured/
-├── frontend/                # 프론트엔드 코드
-│   ├── src/
-│   │   ├── components/      # UI 컴포넌트
-│   │   ├── hooks/           # 커스텀 훅
-│   │   ├── lib/             # 유틸리티 라이브러리
-│   │   ├── utils/           # 유틸리티 함수
-│   │   └── styles/          # 스타일 파일
-│   ├── .env.development     # 개발 환경 설정
-│   └── .env.production      # 프로덕션 환경 설정
-├── backend/                 # 백엔드 코드
-│   ├── src/
-│   │   ├── services/        # 서비스 로직
-│   │   ├── models/          # 데이터 모델
-│   │   ├── routes/          # API 라우트
-│   │   └── utils/           # 유틸리티 함수
-│   └── config/              # 백엔드 설정
-└── docs/                    # 문서
-    ├── api/                 # API 문서
-    ├── user-guide/          # 사용자 가이드
-    └── development/         # 개발 문서
+```powershell
+git clone https://github.com/your-repo/prompt-generator.git
+cd prompt-generator
 ```
 
-## 테스트 결과
+### 2️⃣ 서버 시작
 
-- **프론트엔드 빌드**: 성공
-- **백엔드 API**: 정상 동작
-- **네트워크 연결**: 오류 해결 확인
-- **환경 설정**: 개발/프로덕션 환경 모두 정상 동작
+```powershell
+# 실행 권한 부여 (최초 1회)
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-## 사용 방법
+# 서버 시작 (대화형 메뉴)
+.\start_server.ps1
 
-1. 프론트엔드 실행: `cd frontend && npm run dev`
-2. 백엔드 실행: `cd backend && python src/main.py`
-3. 프로덕션 빌드: `cd frontend && npm run build`
+# 또는 직접 실행
+.\start_server.ps1 -Both    # Frontend + Backend 동시 시작
+.\start_server.ps1 -BackendOnly   # Backend만 시작
+.\start_server.ps1 -FrontendOnly  # Frontend만 시작
+```
 
-## 결론
+### 3️⃣ 브라우저 접속
 
-AI 프롬프트 최적화 웹 도구는 구조적, 기능적 개선을 통해 안정적이고 확장 가능한 상태로 리팩터링되었습니다. 네트워크 오류가 해결되었고, 환경별 설정이 최적화되었으며, 모든 모델 카테고리가 정상적으로 동작합니다. 이제 사용자는 다양한 AI 모델에 최적화된 프롬프트를 쉽게 생성할 수 있습니다.
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:5000
+
+## 📱 사용법
+
+### 기본 프롬프트 최적화
+
+1. **모델 선택**: 드롭다운에서 원하는 AI 모델 선택
+2. **작업 입력**: 텍스트 영역에 요청할 작업 설명
+3. **최적화 실행**: "프롬프트 최적화" 버튼 클릭
+4. **결과 복사**: 생성된 최적화 프롬프트를 클립보드에 복사
+
+### 예시 작업 활용
+
+각 모델별로 준비된 예시 작업들을 클릭하여 빠르게 테스트해볼 수 있습니다:
+
+- **GPT-4**: CSV 파일 처리, 양자컴퓨팅 설명, 마케팅 전략 등
+- **Claude-3**: 연구논문 분석, 보안 검토, 기술 문서 작성 등
+- **Llama-2**: REST API 구현, 코드 변환, 알고리즘 추천 등
+- **Gemini Pro**: 멀티모달 분석, 복합 문서 생성 등
+
+## 🏗️ 아키텍처
+
+```
+prompt-generator/
+├── backend/                 # Flask API 서버
+│   ├── src/
+│   │   ├── app.py          # 메인 Flask 애플리케이션
+│   │   ├── model_optimizer.py    # 프롬프트 최적화 엔진
+│   │   └── template_library.py  # 템플릿 라이브러리
+│   └── requirements.txt     # Python 의존성
+├── frontend/               # React 웹 애플리케이션
+│   ├── src/
+│   │   ├── App.tsx         # 메인 React 컴포넌트
+│   │   └── components/     # UI 컴포넌트들
+│   └── package.json        # Node.js 의존성
+└── start_server.ps1        # 서버 시작 스크립트
+```
+
+## 🔌 API 엔드포인트
+
+### 모델 정보
+
+```http
+GET /api/models
+```
+
+지원되는 AI 모델 목록과 상세 정보를 반환합니다.
+
+### 프롬프트 최적화
+
+```http
+POST /api/optimize
+Content-Type: application/json
+
+{
+  "model": "gpt-4",
+  "task": "사용자 작업 설명"
+}
+```
+
+### 예시 작업
+
+```http
+GET /api/examples/{model}
+```
+
+특정 모델의 예시 작업들을 반환합니다.
+
+### 사용 통계
+
+```http
+GET /api/stats
+```
+
+서비스 사용 통계를 반환합니다.
+
+## 📋 체크리스트 완료 현황
+
+### ✅ Priority 1: Core Functionality (Deploy Today)
+
+- [x] **Step 1**: Basic Working Generator
+  - [x] ModelOptimizationPromptGenerator 클래스 구현
+  - [x] 4개 모델 지원 (GPT-4, Claude-3, Llama-2, Gemini Pro)
+  - [x] 모델별 최적화 규칙 적용
+- [x] **Step 2**: Simple Web Interface
+  - [x] React + TypeScript 프론트엔드
+  - [x] 모델 선택 드롭다운
+  - [x] 작업 입력 텍스트 영역
+  - [x] 최적화 버튼 및 결과 표시
+
+### ✅ Priority 2: Essential Features (Deploy This Week)
+
+- [x] **Step 3**: Add Prompt Templates
+
+  - [x] PromptTemplateLibrary 클래스 구현
+  - [x] 5개 카테고리 템플릿 (코드생성, 분석, 글쓰기, 번역, 요약)
+  - [x] 모델별 템플릿 최적화
+
+- [x] **Step 4**: Basic API Endpoint
+  - [x] Flask 기반 REST API
+  - [x] CORS 설정 및 에러 핸들링
+  - [x] 모델 정보, 최적화, 예시, 통계 API
+
+### ✅ Priority 3: User Experience (Deploy Next Week)
+
+- [x] **Step 5**: Add Common Use Case Examples
+
+  - [x] 모델별 예시 작업 데이터베이스
+  - [x] 클릭으로 예시 선택 기능
+  - [x] 동적 예시 로딩
+
+- [x] **Step 6**: Add Copy-to-Clipboard and History
+  - [x] 클립보드 복사 기능
+  - [x] 로컬 스토리지 기반 히스토리
+  - [x] 히스토리에서 복원 기능
+  - [x] 사용 통계 대시보드
+
+## 🔧 개발 가이드
+
+### Backend 개발
+
+```powershell
+cd backend
+
+# 가상환경 생성
+py -m venv .venv
+
+# 가상환경 활성화
+.\.venv\Scripts\Activate.ps1
+
+# 의존성 설치
+pip install -r requirements.txt
+
+# 개발 서버 시작
+python src/app.py
+```
+
+### Frontend 개발
+
+```powershell
+cd frontend
+
+# 의존성 설치
+npm install
+
+# 개발 서버 시작
+npm run dev
+
+# 프로덕션 빌드
+npm run build
+```
+
+## 🧪 테스트
+
+### Backend 테스트
+
+```powershell
+cd backend
+pytest
+```
+
+### Frontend 테스트
+
+```powershell
+cd frontend
+npm test
+```
+
+### 통합 테스트
+
+```powershell
+# 전체 테스트 실행
+.\run-all-tests.ps1
+```
+
+## 📈 성능 최적화
+
+- **캐싱**: 모델 정보 및 템플릿 메모리 캐싱
+- **지연 로딩**: 필요시에만 데이터 로드
+- **경량화**: 최소한의 의존성으로 빠른 시작
+- **반응형**: 모바일 친화적 UI
+
+## 🛠️ 배포
+
+### Heroku 배포
+
+```powershell
+# Heroku CLI 설치
+winget install Heroku.CLI
+
+# 앱 생성 및 배포
+heroku create your-app-name
+git push heroku main
+```
+
+### Vercel 배포
+
+```powershell
+# Vercel CLI 설치
+npm i -g vercel
+
+# 배포
+vercel --prod
+```
+
+## 🤝 기여하기
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 라이선스
+
+MIT License - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+
+## 👥 제작자
+
+- **개발자**: AI 프롬프트 최적화 전문가
+- **이메일**: contact@example.com
+- **프로젝트 링크**: https://github.com/your-repo/prompt-generator
+
+## 📞 지원
+
+문제가 발생하거나 제안사항이 있으시면:
+
+1. **GitHub Issues**: 버그 리포트 및 기능 요청
+2. **이메일**: 직접 문의
+3. **Wiki**: 상세한 사용법 및 FAQ
+
+---
+
+⭐ 이 프로젝트가 도움이 되셨다면 Star를 눌러주세요!

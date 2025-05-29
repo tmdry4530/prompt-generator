@@ -17,15 +17,11 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("api_server.log", encoding='utf-8'),
+        logging.FileHandler("api_server.log"),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
-
-# Console 출력 인코딩 설정
-sys.stdout.reconfigure(encoding='utf-8', errors='backslashreplace')
-sys.stderr.reconfigure(encoding='utf-8', errors='backslashreplace')
 
 # Flask 앱 초기화
 app = Flask(__name__, static_folder='../../frontend/dist')
@@ -274,8 +270,8 @@ def serve(path):
         return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
-    # 환경 변수에서 포트 가져오기 (기본값: 5001)
-    port = int(os.environ.get('PORT', 5001))
+    # 환경 변수에서 포트 가져오기 (기본값: 5000)
+    port = int(os.environ.get('PORT', 5000))
     
     # 디버그 모드 설정
     debug = os.environ.get('FLASK_ENV') == 'development'

@@ -1,394 +1,603 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from './components/ui/select';
-import { Button } from './components/ui/button';
-import { Textarea } from './components/ui/textarea';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
-import { Toaster } from './components/ui/toaster';
-import { useToast } from './components/ui/use-toast';
-import { Loader2 } from 'lucide-react';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./components/ui/select";
+import { Button } from "./components/ui/button";
+import { Textarea } from "./components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
+import { Toaster } from "./components/ui/toaster";
+import { useToast } from "./components/ui/use-toast";
+import { Loader2 } from "lucide-react";
+import "./App.css";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Copy,
+  Check,
+  Sparkles,
+  Brain,
+  Zap,
+  Target,
+  History,
+  BarChart3,
+} from "lucide-react";
 
 // API 기본 URL
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE = "/api";
 
 // 모델 타입 정의
-interface Model {
-  model_id: string;
-  model_name: string;
-  provider: string;
-  capabilities: string[];
-  supports_multimodal: boolean;
+interface ModelInfo {
+  max_tokens: number;
+  strengths: string[];
+  optimization_tips: string[];
+  prompt_structure: string;
 }
 
 // 최적화 결과 타입 정의
 interface OptimizationResult {
-  success: boolean;
-  original_input: string;
+  original_task: string;
+  model: string;
   optimized_prompt: string;
-  model_id: string;
-  model_info: any;
-  prompt_structure: any;
-  generation_params: any;
-  analysis_result: any;
-  intent_result: any;
-  error?: string;
+  optimization_tips: string[];
+  model_strengths: string[];
+  max_tokens: number;
+  generated_at: string;
+  prompt_structure: string;
+}
+
+interface HistoryItem {
+  id: string;
+  timestamp: string;
+  model: string;
+  task: string;
+  optimizedPrompt: string;
+}
+
+interface ExampleTask {
+  text: string;
+  category: string;
 }
 
 function App() {
   // 상태 관리
-  const [models, setModels] = useState<Model[]>([]);
-  const [selectedModelId, setSelectedModelId] = useState<string>('');
-  const [inputText, setInputText] = useState<string>('');
-  const [optimizationResult, setOptimizationResult] = useState<OptimizationResult | null>(null);
+  const [selectedModel, setSelectedModel] = useState<string>("gpt-4");
+  const [userTask, setUserTask] = useState<string>("");
+  const [optimizedResult, setOptimizedResult] =
+    useState<OptimizationResult | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [modelTips, setModelTips] = useState<string[]>([]);
+  const [error, setError] = useState<string>("");
+  const [copied, setCopied] = useState<boolean>(false);
+  const [models, setModels] = useState<Record<string, ModelInfo>>({});
+  const [examples, setExamples] = useState<string[]>([]);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [stats, setStats] = useState<any>(null);
   const { toast } = useToast();
 
   // 컴포넌트 마운트 시 모델 목록 가져오기
   useEffect(() => {
-    fetchModels();
+    loadModels();
+    loadHistory();
+    loadStats();
   }, []);
 
-  // 모델 선택 시 해당 모델의 팁 가져오기
+  // 모델 변경시 예시 로드
   useEffect(() => {
-    if (selectedModelId) {
-      fetchModelTips(selectedModelId);
+    if (selectedModel) {
+      loadExamples(selectedModel);
     }
-  }, [selectedModelId]);
+  }, [selectedModel]);
 
-  // 모델 목록 가져오기
-  const fetchModels = async () => {
+  // API 함수들
+  const loadModels = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/models`);
-      if (response.data.success) {
-        setModels(response.data.models);
-        // 첫 번째 모델을 기본 선택
-        if (response.data.models.length > 0) {
-          setSelectedModelId(response.data.models[0].model_id);
-        }
-      } else {
-        toast('모델 목록을 가져오는 데 실패했습니다.', {
-          variant: 'destructive',
-        });
-      }
-    } catch (error) {
-      console.error('모델 목록 가져오기 오류:', error);
-      toast('서버 연결에 실패했습니다.', {
-        variant: 'destructive',
-      });
+      const response = await fetch(`${API_BASE}/models`);
+      const data = await response.json();
+      setModels(data.model_details || {});
+    } catch (err) {
+      console.error("모델 정보 로드 실패:", err);
     }
   };
 
-  // 모델 팁 가져오기
-  const fetchModelTips = async (modelId: string) => {
+  const loadExamples = async (model: string) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/model/${modelId}/tips`);
-      if (response.data.success) {
-        setModelTips(response.data.tips);
-      }
-    } catch (error) {
-      console.error('모델 팁 가져오기 오류:', error);
+      const response = await fetch(`${API_BASE}/examples/${model}`);
+      const data = await response.json();
+      setExamples(data.examples || []);
+    } catch (err) {
+      console.error("예시 로드 실패:", err);
     }
   };
 
-  // 프롬프트 최적화 요청
+  const loadHistory = () => {
+    const savedHistory = localStorage.getItem("promptHistory");
+    if (savedHistory) {
+      setHistory(JSON.parse(savedHistory));
+    }
+  };
+
+  const saveToHistory = (result: OptimizationResult) => {
+    const newItem: HistoryItem = {
+      id: Date.now().toString(),
+      timestamp: new Date().toISOString(),
+      model: result.model,
+      task: result.original_task,
+      optimizedPrompt: result.optimized_prompt,
+    };
+
+    const updatedHistory = [newItem, ...history.slice(0, 49)]; // 최대 50개
+    setHistory(updatedHistory);
+    localStorage.setItem("promptHistory", JSON.stringify(updatedHistory));
+  };
+
+  const loadStats = async () => {
+    try {
+      const response = await fetch(`${API_BASE}/stats`);
+      const data = await response.json();
+      setStats(data);
+    } catch (err) {
+      console.error("통계 로드 실패:", err);
+    }
+  };
+
+  // 프롬프트 최적화 실행
   const optimizePrompt = async () => {
-    if (!inputText.trim()) {
-      toast('최적화할 텍스트를 입력해주세요.', {
-        variant: 'destructive',
-      });
-      return;
-    }
-
-    if (!selectedModelId) {
-      toast('AI 모델을 선택해주세요.', {
-        variant: 'destructive',
-      });
+    if (!userTask.trim()) {
+      setError("작업 내용을 입력해주세요.");
       return;
     }
 
     setLoading(true);
+    setError("");
+    setOptimizedResult(null);
+
     try {
-      const response = await axios.post(`${API_BASE_URL}/optimize`, {
-        input_text: inputText,
-        model_id: selectedModelId,
+      const response = await fetch(`${API_BASE}/optimize`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: selectedModel,
+          task: userTask.trim(),
+        }),
       });
 
-      setOptimizationResult(response.data);
-      
-      if (response.data.success) {
-        toast('프롬프트가 성공적으로 최적화되었습니다.');
-      } else {
-        toast(response.data.error || '알 수 없는 오류가 발생했습니다.', {
-          variant: 'destructive',
-        });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "최적화 실패");
       }
-    } catch (error) {
-      console.error('프롬프트 최적화 오류:', error);
-      toast('서버 연결에 실패했습니다.', {
-        variant: 'destructive',
-      });
+
+      if (data.success && data.data) {
+        setOptimizedResult(data.data);
+        saveToHistory(data.data);
+        loadStats(); // 통계 업데이트
+      } else {
+        throw new Error("응답 형식 오류");
+      }
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "알 수 없는 오류가 발생했습니다."
+      );
     } finally {
       setLoading(false);
     }
   };
 
-  // 결과 복사하기
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text).then(
-      () => {
-        toast('클립보드에 복사되었습니다.');
-      },
-      (err) => {
-        console.error('클립보드 복사 실패:', err);
-        toast('클립보드에 복사하지 못했습니다.', {
-          variant: 'destructive',
-        });
-      }
-    );
-  };
-
-  // 결과 저장하기 (로컬 스토리지)
-  const saveResult = () => {
-    if (!optimizationResult) return;
-    
+  // 클립보드 복사
+  const copyToClipboard = async (text: string) => {
     try {
-      const savedResults = JSON.parse(localStorage.getItem('savedPrompts') || '[]');
-      const newResult = {
-        id: Date.now(),
-        timestamp: new Date().toISOString(),
-        modelId: optimizationResult.model_id,
-        modelName: models.find(m => m.model_id === optimizationResult.model_id)?.model_name || '',
-        originalInput: optimizationResult.original_input,
-        optimizedPrompt: optimizationResult.optimized_prompt,
-      };
-      
-      savedResults.push(newResult);
-      localStorage.setItem('savedPrompts', JSON.stringify(savedResults));
-      
-      toast('프롬프트가 저장되었습니다.');
-    } catch (error) {
-      console.error('저장 오류:', error);
-      toast('프롬프트를 저장하지 못했습니다.', {
-        variant: 'destructive',
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("복사 실패:", err);
+      toast("클립보드에 복사하지 못했습니다.", {
+        variant: "destructive",
       });
     }
   };
 
-  // 모델 제공업체별 그룹화
-  const groupedModels = models.reduce((acc, model) => {
-    if (!acc[model.provider]) {
-      acc[model.provider] = [];
-    }
-    acc[model.provider].push(model);
-    return acc;
-  }, {} as Record<string, Model[]>);
+  // 예시 선택
+  const selectExample = (example: string) => {
+    setUserTask(example);
+  };
+
+  // 기록에서 복원
+  const restoreFromHistory = (item: HistoryItem) => {
+    setSelectedModel(item.model);
+    setUserTask(item.task);
+  };
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <Toaster />
-      <header className="mb-8 text-center">
-        <h1 className="text-3xl font-bold mb-2">AI 프롬프트 최적화 도구</h1>
-        <p className="text-gray-600">
-          다양한 AI 모델에 최적화된 고품질 프롬프트를 생성하세요
-        </p>
-      </header>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="md:col-span-1">
-          <Card>
-            <CardHeader>
-              <CardTitle>AI 모델 선택</CardTitle>
-              <CardDescription>
-                프롬프트를 최적화할 AI 모델을 선택하세요
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Select value={selectedModelId} onValueChange={setSelectedModelId}>
-                <SelectTrigger>
-                  <SelectValue placeholder="AI 모델 선택" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.entries(groupedModels).map(([provider, providerModels]) => (
-                    <React.Fragment key={provider}>
-                      <div className="px-2 py-1.5 text-sm font-semibold">{provider}</div>
-                      {providerModels.map((model) => (
-                        <SelectItem key={model.model_id} value={model.model_id}>
-                          {model.model_name}
-                        </SelectItem>
-                      ))}
-                    </React.Fragment>
-                  ))}
-                </SelectContent>
-              </Select>
-            </CardContent>
-            <CardFooter className="flex-col items-start">
-              <h4 className="text-sm font-semibold mb-2">모델 최적화 팁:</h4>
-              <ul className="text-sm text-gray-600 list-disc pl-5 space-y-1">
-                {modelTips.map((tip, index) => (
-                  <li key={index}>{tip}</li>
-                ))}
-              </ul>
-            </CardFooter>
-          </Card>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="max-w-6xl mx-auto space-y-6">
+        {/* 헤더 */}
+        <div className="text-center space-y-4">
+          <div className="flex items-center justify-center gap-3">
+            <Brain className="h-8 w-8 text-indigo-600" />
+            <h1 className="text-4xl font-bold text-gray-900">
+              Model Optimization Prompt Generator
+            </h1>
+          </div>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            AI 모델별로 최적화된 프롬프트를 생성하여 더 나은 결과를 얻으세요
+          </p>
         </div>
 
-        <div className="md:col-span-2">
-          <Card>
-            <CardHeader>
-              <CardTitle>프롬프트 최적화</CardTitle>
-              <CardDescription>
-                기본 요청을 입력하면 선택한 AI 모델에 최적화된 프롬프트로 변환됩니다
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="input-text" className="block text-sm font-medium mb-1">
-                    기본 요청 입력
-                  </label>
-                  <Textarea
-                    id="input-text"
-                    placeholder="여기에 기본 요청을 입력하세요. 예: '산 위에서 일출을 바라보는 사람의 실루엣'"
-                    value={inputText}
-                    onChange={(e) => setInputText(e.target.value)}
-                    rows={5}
-                  />
-                </div>
+        <Tabs defaultValue="generate" className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="generate" className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4" />
+              프롬프트 생성
+            </TabsTrigger>
+            <TabsTrigger value="history" className="flex items-center gap-2">
+              <History className="h-4 w-4" />
+              생성 기록
+            </TabsTrigger>
+            <TabsTrigger value="stats" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              사용 통계
+            </TabsTrigger>
+          </TabsList>
 
-                <Button 
-                  onClick={optimizePrompt} 
-                  className="w-full" 
-                  disabled={loading || !inputText.trim() || !selectedModelId}
-                >
-                  {loading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      최적화 중...
-                    </>
-                  ) : (
-                    '프롬프트 최적화'
+          <TabsContent value="generate" className="space-y-6">
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* 입력 섹션 */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Target className="h-5 w-5" />
+                    프롬프트 설정
+                  </CardTitle>
+                  <CardDescription>
+                    AI 모델과 작업을 선택하여 최적화된 프롬프트를 생성하세요
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* 모델 선택 */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">AI 모델 선택</label>
+                    <Select
+                      value={selectedModel}
+                      onValueChange={setSelectedModel}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="모델을 선택하세요" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.entries(models).map(([modelName, info]) => (
+                          <SelectItem key={modelName} value={modelName}>
+                            <div className="flex items-center gap-2">
+                              <span>{modelName}</span>
+                              <Badge variant="secondary" className="text-xs">
+                                {info.max_tokens.toLocaleString()} 토큰
+                              </Badge>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* 모델 정보 표시 */}
+                  {selectedModel && models[selectedModel] && (
+                    <div className="p-4 bg-blue-50 rounded-lg space-y-3">
+                      <div>
+                        <h4 className="font-medium text-blue-900">모델 특성</h4>
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {models[selectedModel].strengths.map(
+                            (strength, idx) => (
+                              <Badge
+                                key={idx}
+                                variant="outline"
+                                className="text-blue-700"
+                              >
+                                {strength}
+                              </Badge>
+                            )
+                          )}
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-blue-900">최적화 팁</h4>
+                        <ul className="text-sm text-blue-800 mt-1 space-y-1">
+                          {models[selectedModel].optimization_tips
+                            .slice(0, 2)
+                            .map((tip, idx) => (
+                              <li key={idx} className="flex items-start gap-2">
+                                <span className="text-blue-500 mt-1">•</span>
+                                <span>{tip}</span>
+                              </li>
+                            ))}
+                        </ul>
+                      </div>
+                    </div>
                   )}
-                </Button>
 
-                {optimizationResult && optimizationResult.success && (
-                  <div className="mt-6">
-                    <Tabs defaultValue="result">
-                      <TabsList className="grid w-full grid-cols-3">
-                        <TabsTrigger value="result">최적화 결과</TabsTrigger>
-                        <TabsTrigger value="analysis">분석 정보</TabsTrigger>
-                        <TabsTrigger value="params">생성 매개변수</TabsTrigger>
-                      </TabsList>
-                      
-                      <TabsContent value="result" className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium mb-1">
+                  {/* 작업 입력 */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">작업 내용</label>
+                    <Textarea
+                      value={userTask}
+                      onChange={(e) => setUserTask(e.target.value)}
+                      placeholder="AI에게 요청할 작업을 자세히 설명해주세요..."
+                      className="min-h-[120px] resize-none"
+                    />
+                  </div>
+
+                  {/* 예시 작업들 */}
+                  {examples.length > 0 && (
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">
+                        예시 작업 ({selectedModel})
+                      </label>
+                      <div className="grid gap-2">
+                        {examples.slice(0, 3).map((example, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => selectExample(example)}
+                            className="text-left p-3 text-sm bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
+                          >
+                            {example}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 생성 버튼 */}
+                  <Button
+                    onClick={optimizePrompt}
+                    disabled={loading || !userTask.trim()}
+                    className="w-full"
+                    size="lg"
+                  >
+                    {loading ? (
+                      <div className="flex items-center gap-2">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                        최적화 중...
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Zap className="h-4 w-4" />
+                        프롬프트 최적화
+                      </div>
+                    )}
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* 결과 섹션 */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Sparkles className="h-5 w-5" />
+                    최적화 결과
+                  </CardTitle>
+                  <CardDescription>
+                    생성된 최적화 프롬프트를 확인하고 복사하세요
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {error && (
+                    <Alert className="mb-4">
+                      <AlertDescription className="text-red-600">
+                        {error}
+                      </AlertDescription>
+                    </Alert>
+                  )}
+
+                  {optimizedResult ? (
+                    <div className="space-y-4">
+                      {/* 최적화된 프롬프트 */}
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <label className="text-sm font-medium">
                             최적화된 프롬프트
                           </label>
-                          <div className="relative">
-                            <Textarea
-                              value={optimizationResult.optimized_prompt}
-                              readOnly
-                              rows={8}
-                              className="pr-12"
-                            />
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="absolute top-2 right-2"
-                              onClick={() => copyToClipboard(optimizationResult.optimized_prompt)}
-                            >
-                              복사
-                            </Button>
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <Button variant="outline" onClick={saveResult}>
-                            결과 저장
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() =>
+                              copyToClipboard(optimizedResult.optimized_prompt)
+                            }
+                            className="flex items-center gap-2"
+                          >
+                            {copied ? (
+                              <Check className="h-4 w-4" />
+                            ) : (
+                              <Copy className="h-4 w-4" />
+                            )}
+                            {copied ? "복사됨" : "복사"}
                           </Button>
                         </div>
-                      </TabsContent>
-                      
-                      <TabsContent value="analysis">
-                        <div className="space-y-4">
-                          <div>
-                            <h3 className="text-sm font-medium mb-1">키워드 분석</h3>
-                            <div className="bg-gray-50 p-3 rounded-md text-sm">
-                              {optimizationResult.analysis_result.keywords?.map((keyword: string, i: number) => (
-                                <span key={i} className="inline-block bg-blue-100 text-blue-800 rounded-full px-2 py-1 text-xs mr-2 mb-2">
-                                  {keyword}
-                                </span>
-                              )) || '키워드 분석 정보가 없습니다.'}
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <h3 className="text-sm font-medium mb-1">의도 분석</h3>
-                            <div className="bg-gray-50 p-3 rounded-md text-sm">
-                              {optimizationResult.intent_result.primary_intent || '의도 분석 정보가 없습니다.'}
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <h3 className="text-sm font-medium mb-1">프롬프트 구조</h3>
-                            <div className="bg-gray-50 p-3 rounded-md text-sm">
-                              {optimizationResult.prompt_structure.components?.map((component: string, i: number) => (
-                                <div key={i} className="mb-1">
-                                  • {component}
-                                </div>
-                              )) || '프롬프트 구조 정보가 없습니다.'}
-                            </div>
-                          </div>
+                        <div className="p-4 bg-gray-50 rounded-lg max-h-64 overflow-y-auto">
+                          <pre className="whitespace-pre-wrap text-sm font-mono">
+                            {optimizedResult.optimized_prompt}
+                          </pre>
                         </div>
-                      </TabsContent>
-                      
-                      <TabsContent value="params">
-                        <div className="space-y-4">
-                          <div>
-                            <h3 className="text-sm font-medium mb-1">생성 매개변수</h3>
-                            <div className="bg-gray-50 p-3 rounded-md text-sm">
-                              {Object.keys(optimizationResult.generation_params || {}).length > 0 ? (
-                                <pre className="whitespace-pre-wrap">
-                                  {JSON.stringify(optimizationResult.generation_params, null, 2)}
-                                </pre>
-                              ) : (
-                                '생성 매개변수 정보가 없습니다.'
-                              )}
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <h3 className="text-sm font-medium mb-1">모델 정보</h3>
-                            <div className="bg-gray-50 p-3 rounded-md text-sm">
-                              <div><strong>모델:</strong> {optimizationResult.model_info.model_name}</div>
-                              <div><strong>제공업체:</strong> {optimizationResult.model_info.provider}</div>
-                              <div><strong>기능:</strong> {optimizationResult.model_info.capabilities.join(', ')}</div>
-                            </div>
-                          </div>
+                      </div>
+
+                      {/* 메타 정보 */}
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <span className="font-medium">모델:</span>{" "}
+                          {optimizedResult.model}
                         </div>
-                      </TabsContent>
-                    </Tabs>
+                        <div>
+                          <span className="font-medium">구조:</span>{" "}
+                          {optimizedResult.prompt_structure}
+                        </div>
+                        <div>
+                          <span className="font-medium">생성 시간:</span>{" "}
+                          {new Date(
+                            optimizedResult.generated_at
+                          ).toLocaleString("ko-KR")}
+                        </div>
+                        <div>
+                          <span className="font-medium">토큰 한계:</span>{" "}
+                          {optimizedResult.max_tokens.toLocaleString()}
+                        </div>
+                      </div>
+
+                      {/* 최적화 팁 */}
+                      <div className="space-y-2">
+                        <h4 className="font-medium">적용된 최적화 기법</h4>
+                        <ul className="space-y-1">
+                          {optimizedResult.optimization_tips.map((tip, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-2 text-sm"
+                            >
+                              <span className="text-green-500 mt-1">✓</span>
+                              <span>{tip}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center py-12 text-gray-500">
+                      <Brain className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                      <p>
+                        왼쪽에서 모델과 작업을 선택한 후<br />
+                        프롬프트 최적화 버튼을 눌러주세요
+                      </p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="history">
+            <Card>
+              <CardHeader>
+                <CardTitle>생성 기록</CardTitle>
+                <CardDescription>
+                  최근 생성한 프롬프트들을 확인하고 다시 사용할 수 있습니다
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {history.length > 0 ? (
+                  <div className="space-y-4">
+                    {history.slice(0, 10).map((item) => (
+                      <div
+                        key={item.id}
+                        className="p-4 border rounded-lg hover:bg-gray-50"
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1 space-y-2">
+                            <div className="flex items-center gap-2">
+                              <Badge variant="outline">{item.model}</Badge>
+                              <span className="text-sm text-gray-500">
+                                {new Date(item.timestamp).toLocaleString(
+                                  "ko-KR"
+                                )}
+                              </span>
+                            </div>
+                            <p className="font-medium">{item.task}</p>
+                            <p className="text-sm text-gray-600 line-clamp-2">
+                              {item.optimizedPrompt.substring(0, 150)}...
+                            </p>
+                          </div>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => restoreFromHistory(item)}
+                          >
+                            복원
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12 text-gray-500">
+                    <History className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                    <p>아직 생성 기록이 없습니다</p>
                   </div>
                 )}
-                
-                {optimizationResult && !optimizationResult.success && (
-                  <div className="mt-6 p-4 bg-red-50 text-red-800 rounded-md">
-                    <h3 className="font-medium">오류 발생</h3>
-                    <p>{optimizationResult.error || '알 수 없는 오류가 발생했습니다.'}</p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="stats">
+            <Card>
+              <CardHeader>
+                <CardTitle>사용 통계</CardTitle>
+                <CardDescription>
+                  프롬프트 생성기 사용 현황을 확인하세요
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {stats ? (
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="text-center p-4 bg-blue-50 rounded-lg">
+                        <div className="text-2xl font-bold text-blue-600">
+                          {stats.total_requests}
+                        </div>
+                        <div className="text-sm text-blue-800">총 요청 수</div>
+                      </div>
+                      <div className="text-center p-4 bg-green-50 rounded-lg">
+                        <div className="text-2xl font-bold text-green-600">
+                          {Object.keys(stats.model_usage).length}
+                        </div>
+                        <div className="text-sm text-green-800">
+                          사용된 모델
+                        </div>
+                      </div>
+                      <div className="text-center p-4 bg-purple-50 rounded-lg">
+                        <div className="text-2xl font-bold text-purple-600">
+                          {stats.recent_requests_count}
+                        </div>
+                        <div className="text-sm text-purple-800">최근 요청</div>
+                      </div>
+                    </div>
+
+                    {stats.top_models && stats.top_models.length > 0 && (
+                      <div>
+                        <h4 className="font-medium mb-3">인기 모델</h4>
+                        <div className="space-y-2">
+                          {stats.top_models.map(
+                            ([model, count]: [string, number]) => (
+                              <div
+                                key={model}
+                                className="flex items-center justify-between p-2 bg-gray-50 rounded"
+                              >
+                                <span className="font-medium">{model}</span>
+                                <Badge variant="secondary">{count}회</Badge>
+                              </div>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-center py-12 text-gray-500">
+                    <BarChart3 className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                    <p>통계를 로드하는 중...</p>
                   </div>
                 )}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

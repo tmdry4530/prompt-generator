@@ -7,9 +7,8 @@ import importlib
 import os
 import re
 
-from .analyzers.input_analyzer import InputAnalyzer
-from .analyzers.intent_detector import IntentDetector
-from .models.base_model import BaseModel
+from ..utils.input_analyzer import InputAnalyzer
+from ..models.base_model import BaseModel
 
 class PromptOptimizer:
     """
@@ -21,7 +20,6 @@ class PromptOptimizer:
     def __init__(self):
         """프롬프트 최적화 엔진 초기화"""
         self.input_analyzer = InputAnalyzer()
-        self.intent_detector = IntentDetector()
         self.models = {}
         self._load_models()
     
@@ -43,34 +41,27 @@ class PromptOptimizer:
         """지정된 디렉토리에서 모델을 로드합니다."""
         try:
             # 모듈 경로 생성
-            module_path = f'.models.{directory}'
+            module_path = f'..models.{directory}'
             
-            # 디렉토리 내 모든 Python 파일 가져오기
-            module_dir = os.path.join(os.path.dirname(__file__), 'models', directory)
-            
-            if not os.path.exists(module_dir):
-                return
-            
-            for filename in os.listdir(module_dir):
-                if filename.endswith('.py') and not filename.startswith('__'):
-                    # 파일 이름에서 모듈 이름 추출
-                    module_name = filename[:-3]
-                    
-                    try:
-                        # 모듈 동적 로드
-                        module = importlib.import_module(f'{module_path}.{module_name}', package=__package__)
+            # 모듈 동적 로드
+            module = importlib.import_module(module_path, package=__package__)
                         
-                        # 모듈 내 모든 클래스 검사
-                        for attr_name in dir(module):
-                            attr = getattr(module, attr_name)
+            # __all__ 리스트에서 클래스 이름들 가져오기
+            if hasattr(module, '__all__'):
+                for class_name in module.__all__:
+                    try:
+                        # 클래스 가져오기
+                        model_class = getattr(module, class_name)
                             
-                            # BaseModel을 상속받은 클래스인지 확인
-                            if isinstance(attr, type) and issubclass(attr, BaseModel) and attr is not BaseModel:
-                                # 모델 인스턴스 생성 및 저장
-                                model_instance = attr()
-                                self.models[model_instance.model_id] = model_instance
-                    except (ImportError, AttributeError) as e:
-                        print(f"모델 로드 중 오류 발생: {module_name} - {str(e)}")
+                        # BaseModel을 상속받은 클래스인지 확인
+                        if isinstance(model_class, type) and issubclass(model_class, BaseModel) and model_class is not BaseModel:
+                            # 모델 인스턴스 생성 및 저장
+                            model_instance = model_class()
+                            self.models[model_instance.model_id] = model_instance
+                            print(f"모델 로드 성공: {model_instance.model_id} ({model_instance.model_name})")
+                    except Exception as e:
+                        print(f"모델 클래스 로드 중 오류 발생: {class_name} - {str(e)}")
+            
         except Exception as e:
             print(f"모델 디렉토리 로드 중 오류 발생: {directory} - {str(e)}")
     
@@ -121,8 +112,13 @@ class PromptOptimizer:
             # 입력 분석
             analysis_result = self.input_analyzer.analyze(input_text, model_id)
             
-            # 의도 감지
-            intent_result = self.intent_detector.detect_intent(input_text)
+            # 의도 결과 (기본값 설정)
+            intent_result = {
+                "primary_intent": ("generate_content", 0.8),
+                "is_creative": False,
+                "is_technical": False,
+                "urgency_level": "medium"
+            }
             
             # 선택된 모델 가져오기
             model = self.models[model_id]

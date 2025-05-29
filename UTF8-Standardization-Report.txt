@@ -1,0 +1,16 @@
+﻿UTF-8 인코딩 표준화 완료 보고서
+
+완료 시간: 05/29/2025 19:20:33
+
+ 스크립트 파일들 (영어 주석 표준화 완료):
+  - run-all-tests.ps1 (PowerShell)
+  - frontend/test-integration.ps1 (PowerShell)
+  - backend/integration_test.sh (Bash)
+  - backend/test/integration_test.sh (Bash)
+
+ 애플리케이션 코드 (한국어 주석 표준화 완료):
+  - backend/src/app.py (Python)
+  - frontend/src/App.tsx (TypeScript React)
+  - frontend/src/main.tsx (TypeScript React)
+
+ 모든 파일이 UTF-8 인코딩 표준을 준수합니다!

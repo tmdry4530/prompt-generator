@@ -1,0 +1,21 @@
+[flake8]
+exclude = 
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    dist,
+    build,
+    test
+
+# 라인 길이는 120자까지 허용
+max-line-length = 120
+
+# 몇몇 스타일 에러는 무시
+ignore = 
+    E203,  # 슬라이스에서 공백 관련
+    E231,  # 콤마 뒤 공백 누락
+    E501,  # 라인 길이 초과 (max-line-length가 있으므로)
+    W503,  # 라인 중간에 연산자 있는 것 관련
+    F403,  # from module import * 허용
+    F405   # * 임포트 후 사용 허용 

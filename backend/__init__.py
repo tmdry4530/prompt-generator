@@ -1,0 +1,17 @@
+"""
+AI 프롬프트 최적화 도구 - 백엔드 패키지
+"""
+
+# 패키지 정보
+__version__ = "1.0.0"
+__author__ = "AI Prompt Optimizer Team"
+__description__ = "AI 모델별 프롬프트 최적화 도구의 백엔드 패키지"
+
+# 주요 패키지들 import
+from . import src
+from . import config
+
+__all__ = [
+    'src',
+    'config'
+] 

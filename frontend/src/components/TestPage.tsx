@@ -1,9 +1,19 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Loader2 } from 'lucide-react';
-import { runAllTests, summarizeTestResults, TestResult } from '../utils/testing';
-import { useToast } from '../components/ui/use-toast';
-import React, { useState } from 'react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Loader2 } from "lucide-react";
+import {
+  runAllTests,
+  summarizeTestResults,
+  TestResult,
+} from "../utils/testing";
+import { useToast } from "../components/ui/use-toast";
+import React, { useState } from "react";
 
 const TestPage: React.FC = () => {
   const [testResults, setTestResults] = useState<TestResult[]>([]);
@@ -23,15 +33,16 @@ const TestPage: React.FC = () => {
       setSummary(resultSummary);
 
       if (resultSummary.failed === 0) {
-        toast('모든 테스트가 성공적으로 완료되었습니다.');
+        toast("모든 테스트가 성공적으로 완료되었습니다.");
       } else {
         toast(`${resultSummary.failed}개의 테스트가 실패했습니다.`, {
-          variant: 'destructive',
+          variant: "destructive",
         });
       }
-    } catch (error) {
-      toast('테스트 실행 중 오류가 발생했습니다.', {
-        variant: 'destructive',
+    } catch (err) {
+      console.error("테스트 오류:", err);
+      toast("테스트 실행 중 오류가 발생했습니다.", {
+        variant: "destructive",
       });
     } finally {
       setIsRunning(false);
@@ -56,8 +67,8 @@ const TestPage: React.FC = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button 
-              onClick={handleRunTests} 
+            <Button
+              onClick={handleRunTests}
               disabled={isRunning}
               className="w-full"
             >
@@ -67,7 +78,7 @@ const TestPage: React.FC = () => {
                   테스트 실행 중...
                 </>
               ) : (
-                '모든 테스트 실행'
+                "모든 테스트 실행"
               )}
             </Button>
           </CardContent>
@@ -77,9 +88,7 @@ const TestPage: React.FC = () => {
           <Card>
             <CardHeader>
               <CardTitle>테스트 요약</CardTitle>
-              <CardDescription>
-                테스트 결과 요약 정보
-              </CardDescription>
+              <CardDescription>테스트 결과 요약 정보</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-4 gap-4 mb-4">
@@ -88,15 +97,21 @@ const TestPage: React.FC = () => {
                   <div className="text-sm text-gray-600">전체 테스트</div>
                 </div>
                 <div className="bg-green-100 p-4 rounded-md text-center">
-                  <div className="text-2xl font-bold text-green-700">{summary.passed}</div>
+                  <div className="text-2xl font-bold text-green-700">
+                    {summary.passed}
+                  </div>
                   <div className="text-sm text-green-700">성공</div>
                 </div>
                 <div className="bg-red-100 p-4 rounded-md text-center">
-                  <div className="text-2xl font-bold text-red-700">{summary.failed}</div>
+                  <div className="text-2xl font-bold text-red-700">
+                    {summary.failed}
+                  </div>
                   <div className="text-sm text-red-700">실패</div>
                 </div>
                 <div className="bg-blue-100 p-4 rounded-md text-center">
-                  <div className="text-2xl font-bold text-blue-700">{summary.passRate.toFixed(1)}%</div>
+                  <div className="text-2xl font-bold text-blue-700">
+                    {summary.passRate.toFixed(1)}%
+                  </div>
                   <div className="text-sm text-blue-700">성공률</div>
                 </div>
               </div>
@@ -119,21 +134,36 @@ const TestPage: React.FC = () => {
           <Card>
             <CardHeader>
               <CardTitle>상세 테스트 결과</CardTitle>
-              <CardDescription>
-                각 테스트의 상세 결과
-              </CardDescription>
+              <CardDescription>각 테스트의 상세 결과</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {testResults.map((result, index) => (
-                  <div key={index} className="border rounded-md overflow-hidden">
-                    <div className={`p-4 ${result.success ? 'bg-green-50' : 'bg-red-50'}`}>
+                  <div
+                    key={index}
+                    className="border rounded-md overflow-hidden"
+                  >
+                    <div
+                      className={`p-4 ${
+                        result.success ? "bg-green-50" : "bg-red-50"
+                      }`}
+                    >
                       <div className="flex justify-between items-center">
-                        <h3 className={`font-medium ${result.success ? 'text-green-700' : 'text-red-700'}`}>
+                        <h3
+                          className={`font-medium ${
+                            result.success ? "text-green-700" : "text-red-700"
+                          }`}
+                        >
                           {result.name}
                         </h3>
-                        <span className={`px-2 py-1 text-xs rounded-full ${result.success ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
-                          {result.success ? '성공' : '실패'}
+                        <span
+                          className={`px-2 py-1 text-xs rounded-full ${
+                            result.success
+                              ? "bg-green-200 text-green-800"
+                              : "bg-red-200 text-red-800"
+                          }`}
+                        >
+                          {result.success ? "성공" : "실패"}
                         </span>
                       </div>
                       <p className="text-sm mt-2">{result.message}</p>
