@@ -28,7 +28,11 @@ sys.stdout.reconfigure(encoding='utf-8', errors='backslashreplace')
 sys.stderr.reconfigure(encoding='utf-8', errors='backslashreplace')
 
 # Flask 앱 초기화
+<<<<<<< HEAD
 app = Flask(__name__, static_folder='../../frontend/dist')
+=======
+app = Flask(__name__, static_folder='static') # Path relative to backend/
+>>>>>>> 18484904e94c2c1fa8167b2fc37183a158c51fff
 CORS(app)  # CORS 설정
 
 # 프롬프트 최적화 엔진 초기화

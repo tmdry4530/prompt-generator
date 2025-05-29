@@ -8,6 +8,10 @@ import os
 import re
 
 from ..utils.input_analyzer import InputAnalyzer
+<<<<<<< HEAD
+=======
+from ..utils.intent_detector import IntentDetector
+>>>>>>> 18484904e94c2c1fa8167b2fc37183a158c51fff
 from ..models.base_model import BaseModel
 
 class PromptOptimizer:
@@ -43,8 +47,27 @@ class PromptOptimizer:
             # 모듈 경로 생성
             module_path = f'..models.{directory}'
             
+<<<<<<< HEAD
             # 모듈 동적 로드
             module = importlib.import_module(module_path, package=__package__)
+=======
+            # 디렉토리 내 모든 Python 파일 가져오기
+            # __file__ is optimizer.py, so dirname is services. '..' goes to src, then 'models'
+            module_dir = os.path.join(os.path.dirname(__file__), '..', 'models', directory)
+            
+            if not os.path.exists(module_dir):
+                print(f"Model directory not found: {module_dir}") # Added a print for debugging
+                return
+            
+            for filename in os.listdir(module_dir):
+                if filename.endswith('.py') and not filename.startswith('__'):
+                    # 파일 이름에서 모듈 이름 추출
+                    module_name = filename[:-3]
+                    
+                    try:
+                        # 모듈 동적 로드
+                        module = importlib.import_module(f'{module_path}.{module_name}', package=__package__)
+>>>>>>> 18484904e94c2c1fa8167b2fc37183a158c51fff
                         
             # __all__ 리스트에서 클래스 이름들 가져오기
             if hasattr(module, '__all__'):
