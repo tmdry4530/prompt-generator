@@ -8,10 +8,7 @@ import os
 import re
 
 from ..utils.input_analyzer import InputAnalyzer
-<<<<<<< HEAD
-=======
-from ..utils.intent_detector import IntentDetector
->>>>>>> 18484904e94c2c1fa8167b2fc37183a158c51fff
+from ..utils.intent_detector import IntentDetector # Resolved import
 from ..models.base_model import BaseModel
 
 class PromptOptimizer:
@@ -24,6 +21,7 @@ class PromptOptimizer:
     def __init__(self):
         """프롬프트 최적화 엔진 초기화"""
         self.input_analyzer = InputAnalyzer()
+        self.intent_detector = IntentDetector() # Added IntentDetector initialization
         self.models = {}
         self._load_models()
     
@@ -47,10 +45,6 @@ class PromptOptimizer:
             # 모듈 경로 생성
             module_path = f'..models.{directory}'
             
-<<<<<<< HEAD
-            # 모듈 동적 로드
-            module = importlib.import_module(module_path, package=__package__)
-=======
             # 디렉토리 내 모든 Python 파일 가져오기
             # __file__ is optimizer.py, so dirname is services. '..' goes to src, then 'models'
             module_dir = os.path.join(os.path.dirname(__file__), '..', 'models', directory)
@@ -67,23 +61,24 @@ class PromptOptimizer:
                     try:
                         # 모듈 동적 로드
                         module = importlib.import_module(f'{module_path}.{module_name}', package=__package__)
->>>>>>> 18484904e94c2c1fa8167b2fc37183a158c51fff
                         
-            # __all__ 리스트에서 클래스 이름들 가져오기
-            if hasattr(module, '__all__'):
-                for class_name in module.__all__:
-                    try:
-                        # 클래스 가져오기
-                        model_class = getattr(module, class_name)
-                            
-                        # BaseModel을 상속받은 클래스인지 확인
-                        if isinstance(model_class, type) and issubclass(model_class, BaseModel) and model_class is not BaseModel:
-                            # 모델 인스턴스 생성 및 저장
-                            model_instance = model_class()
-                            self.models[model_instance.model_id] = model_instance
-                            print(f"모델 로드 성공: {model_instance.model_id} ({model_instance.model_name})")
-                    except Exception as e:
-                        print(f"모델 클래스 로드 중 오류 발생: {class_name} - {str(e)}")
+                        # __all__ 리스트에서 클래스 이름들 가져오기
+                        if hasattr(module, '__all__'): # Kept from 18484904e94c2c1fa8167b2fc37183a158c51fff version
+                            for class_name in module.__all__:
+                                try:
+                                    # 클래스 가져오기
+                                    model_class = getattr(module, class_name)
+
+                                    # BaseModel을 상속받은 클래스인지 확인
+                                    if isinstance(model_class, type) and issubclass(model_class, BaseModel) and model_class is not BaseModel:
+                                        # 모델 인스턴스 생성 및 저장
+                                        model_instance = model_class()
+                                        self.models[model_instance.model_id] = model_instance
+                                        print(f"모델 로드 성공: {model_instance.model_id} ({model_instance.model_name})")
+                                except Exception as e:
+                                    print(f"모델 클래스 로드 중 오류 발생: {class_name} - {str(e)}")
+                    except ImportError as e: # Catch import error for individual modules
+                        print(f"Error importing module {module_name} in {directory}: {e}")
             
         except Exception as e:
             print(f"모델 디렉토리 로드 중 오류 발생: {directory} - {str(e)}")
@@ -135,13 +130,8 @@ class PromptOptimizer:
             # 입력 분석
             analysis_result = self.input_analyzer.analyze(input_text, model_id)
             
-            # 의도 결과 (기본값 설정)
-            intent_result = {
-                "primary_intent": ("generate_content", 0.8),
-                "is_creative": False,
-                "is_technical": False,
-                "urgency_level": "medium"
-            }
+            # 의도 분석
+            intent_result = self.intent_detector.detect_intent(input_text) # Using IntentDetector
             
             # 선택된 모델 가져오기
             model = self.models[model_id]
