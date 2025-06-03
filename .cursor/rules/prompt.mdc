@@ -1,0 +1,292 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Standard guidelines for Korean-language Windows development environment
+globs: "**/*.{js,ts,py,ps1,md}"
+alwaysApply: true
+---
+
+# Korean-Focused Windows Development Guidelines
+
+## Language and Documentation Principles
+
+- **Language Policy**:
+  - ✅ DO: Write all answers, code comments, and log explanations **in Korean**
+  - ✅ DO: Keep technical terms, CLI flags, and library names in English; add Korean explanations when necessary
+  - ❌ DON'T: Write technical documentation only in English
+  - ❌ DON'T: Use English technical terms without Korean explanations
+
+- **Standard Comment Pattern**:
+  ```javascript
+  // ✅ DO: Combine Korean comments with English technical terms
+  /**
+   * 사용자 인터페이스 컴포넌트를 렌더링합니다
+   * @param {Object} props - React props 객체
+   * @returns {JSX.Element} 렌더링된 컴포넌트
+   */
+  function renderUserInterface(props) {
+    // API 호출 결과를 state에 저장
+    const [data, setData] = useState(null);
+    
+    return <div>/* 컴포넌트 내용 */</div>;
+  }
+  ```
+
+- **Shell Script Comment Standards**:
+  - ✅ DO: Use **English comments** in shell scripts (PowerShell, Bash, Batch)
+  - ✅ DO: Use Korean in application code comments (JS, TS, Python, etc.)
+  - ❌ DON'T: Use Korean in shell scripts to prevent encoding issues
+  
+  ```powershell
+  # ✅ DO: English comments in PowerShell scripts
+  # Start the development server
+  npm run dev
+  
+  # Check if the process is running
+  Get-Process -Name "node" -ErrorAction SilentlyContinue
+  
+  # Set environment variables for the application
+  $env:NODE_ENV = "development"
+  ```
+  
+  ```bash
+  # ✅ DO: English comments in Bash scripts
+  # Install dependencies and start the server
+  npm install
+  npm run build
+  
+  # Create backup directory if it doesn't exist
+  mkdir -p ./backup
+  ```
+
+## Default Development Environment Setup
+
+- **Standard Environment Configuration**:
+  - **OS**: Windows 11 (64-bit, latest patches)
+  - **Terminal**: PowerShell 7.x or higher (pwsh)
+  - **Editor**: Cursor with VSCode extension ecosystem
+  - **Encoding**: UTF-8, line endings CRLF
+
+- **Environment Validation**:
+  ```powershell
+  # ✅ DO: Verify development environment versions
+  pwsh --version
+  git --version
+  node --version
+  ```
+  > Check versions of PowerShell and major tools to ensure environment consistency.
+
+## Command and Script Generation Standards
+
+- **Command Priority**:
+  - ✅ DO: Provide **PowerShell** syntax as default
+  - ✅ DO: Add Unix/Bash examples below PowerShell when helpful
+  - ❌ DON'T: Provide only Bash commands
+  - ❌ DON'T: Use forward slashes (/) in paths
+
+- **Standard Command Format**:
+  ```powershell
+  # ✅ DO: PowerShell default examples
+  winget install -e --id Git.Git
+  Set-Location "C:\workspace\project"
+  $env:OPENAI_API_KEY = "YOUR_KEY_HERE"
+  ```
+  ```bash
+  # (Reference) Bash examples
+  sudo apt-get install git
+  cd /workspace/project
+  export OPENAI_API_KEY="YOUR_KEY_HERE"
+  ```
+  > Use backslashes and environment variable formats consistently in Windows environment.
+
+## Package and Tool Chain Management
+
+- **Package Installation Priority**:
+  - **1st Priority**: Use `winget`
+  - **2nd Priority**: Provide `choco` alternative when `winget` fails
+  - **Node.js**: `pnpm` first, `npm` as alternative
+  - **Python**: Mandatory virtual environment creation
+
+- **Package Installation Patterns**:
+  ```powershell
+  # ✅ DO: Use winget as primary choice
+  winget install -e --id Microsoft.VisualStudioCode
+  
+  # Alternative when winget fails
+  # choco install vscode -y
+  ```
+  
+  ```powershell
+  # ✅ DO: Node.js package management
+  pnpm install express
+  # or: npm install express
+  ```
+  
+  ```powershell
+  # ✅ DO: Python virtual environment creation
+  py -m venv .venv
+  .\.venv\Scripts\Activate.ps1
+  pip install requests
+  ```
+  > Apply priority based on Windows compatibility and performance considerations for each tool.
+
+## Code and Project Example Standards
+
+- **File and Path Handling**:
+  - ✅ DO: Use UTF-8 (no BOM), CRLF line endings
+  - ✅ DO: Provide both absolute and relative paths
+  - ✅ DO: Assume `git config --global core.autocrlf true` as default setting
+  - ❌ DON'T: Use only Unix-style paths
+
+- **Path Notation Methods**:
+  ```powershell
+  # ✅ DO: Use Windows path format
+  $ProjectRoot = "C:\workspace\my-project"
+  $RelativePath = ".\src\components\Header.jsx"
+  $ConfigFile = "$ProjectRoot\config\settings.json"
+  ```
+  > Maintain consistency with Windows file system using backslashes.
+
+## Date and Time Handling
+
+- **Timezone Standards**:
+  - ✅ DO: Interpret and display all timestamps in **Asia/Seoul (UTC+9)**
+  - ✅ DO: Specify Korean time in logs and debug messages
+
+  ```javascript
+  // ✅ DO: Apply Korean timezone
+  const now = new Date().toLocaleString('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+  console.log(`작업 완료 시간: ${now}`);
+  ```
+  > Use time notation that Korean developers can intuitively understand.
+
+## Security and Privilege Management
+
+- **Administrator Privilege Handling**:
+  - ✅ DO: When administrator rights are required, first guide `Start-Process pwsh -Verb RunAs`
+  - ✅ DO: Use placeholders like `'YOUR_KEY_HERE'` for sensitive data
+  - ❌ DON'T: Expose actual API keys or token values
+
+- **Privilege Escalation Patterns**:
+  ```powershell
+  # ✅ DO: When administrator privileges are needed
+  # 1. Run PowerShell with administrator privileges
+  Start-Process pwsh -Verb RunAs
+  
+  # 2. Execute actual commands in administrator window
+  Install-Module -Name PowerShellGet -Force -AllowClobber
+  ```
+  
+  ```powershell
+  # ✅ DO: Environment variable setup (sensitive information)
+  $env:DATABASE_URL = "YOUR_DATABASE_CONNECTION_STRING_HERE"
+  $env:JWT_SECRET = "YOUR_JWT_SECRET_KEY_HERE"
+  ```
+  > Use placeholders instead of actual values for security considerations.
+
+## Explanation Style and Structure
+
+- **Documentation Structure Standards**:
+  - ✅ DO: Use **section numbers/subtitles** for improved readability
+  - ✅ DO: Add 1-2 line explanations of how it works after each code block
+  - ✅ DO: Provide core summaries using `>` blockquotes
+  - ❌ DON'T: List only code without explanations
+
+- **Explanation Patterns**:
+  ```powershell
+  # ✅ DO: Code blocks with clear explanations
+  Get-ChildItem -Path "C:\workspace" -Recurse -Include "*.js" | 
+    Select-String -Pattern "console.log"
+  ```
+  > Recursively searches JavaScript files to find console.log statements.
+
+  ```javascript
+  // ✅ DO: Code with Korean comments
+  const fetchUserData = async (userId) => {
+    try {
+      // API에서 사용자 정보를 가져옵니다
+      const response = await fetch(`/api/users/${userId}`);
+      const userData = await response.json();
+      
+      return userData;
+    } catch (error) {
+      // 오류 발생 시 콘솔에 기록하고 null 반환
+      console.error('사용자 데이터 조회 실패:', error.message);
+      return null;
+    }
+  };
+  ```
+  > Implements safe error handling using try-catch in asynchronous functions.
+
+## Integrated Workflow Examples
+
+- **Project Startup Checklist**:
+  ```powershell
+  # ✅ DO: New project initialization workflow
+  # 1. Create project directory
+  New-Item -ItemType Directory -Path "C:\workspace\new-project"
+  Set-Location "C:\workspace\new-project"
+  
+  # 2. Initialize Git repository
+  git init
+  git config core.autocrlf true
+  
+  # 3. Setup Node.js project
+  pnpm init
+  pnpm add -D typescript @types/node
+  
+  # 4. Create development environment configuration files
+  @"
+  {
+    "compilerOptions": {
+      "target": "ES2022",
+      "module": "ESNext",
+      "moduleResolution": "node"
+    }
+  }
+  "@ | Out-File -FilePath "tsconfig.json" -Encoding UTF8
+  ```
+  > Execute step-by-step project initialization process optimized for Windows environment.
+
+## Character Encoding and Console Output
+
+- **Encoding Standards**:
+  - ✅ DO: Use **UTF-8** encoding for all source files
+  - ✅ DO: Use **English comments** in shell scripts to prevent console encoding issues
+  - ✅ DO: Set PowerShell output encoding to UTF-8 when needed
+  - ❌ DON'T: Use Korean characters in shell script comments or console output
+  - ❌ DON'T: Mix different encodings in the same project
+
+- **Console Output Safety**:
+  ```powershell
+  # ✅ DO: Safe console output in PowerShell
+  # Set UTF-8 encoding for console output if needed
+  [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+  
+  # Use English for shell script messages
+  Write-Host "Starting development server..." -ForegroundColor Green
+  Write-Host "Server is running on http://localhost:5173" -ForegroundColor Cyan
+  Write-Host "Backend API: http://localhost:5000" -ForegroundColor Cyan
+  Write-Host "Press Ctrl+C to stop the server" -ForegroundColor Yellow
+  ```
+  
+  ```javascript
+  // ✅ DO: Korean messages in application code are fine
+  console.log('개발 서버가 시작되었습니다');
+  console.log('서버 주소: http://localhost:5173');
+  console.error('API 연결에 실패했습니다:', error.message);
+  ```
+  > Separate shell-level messages (English) from application-level messages (Korean) to prevent encoding issues.
+
+
+Please refer to these guidelines to build and maintain a consistent Korean development environment.

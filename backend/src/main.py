@@ -28,12 +28,36 @@ sys.stdout.reconfigure(encoding='utf-8', errors='backslashreplace')
 sys.stderr.reconfigure(encoding='utf-8', errors='backslashreplace')
 
 # Flask 앱 초기화
-<<<<<<< HEAD
 app = Flask(__name__, static_folder='../../frontend/dist')
-=======
-app = Flask(__name__, static_folder='static') # Path relative to backend/
->>>>>>> 18484904e94c2c1fa8167b2fc37183a158c51fff
-CORS(app)  # CORS 설정
+
+# CORS 설정 개선 - 명시적인 오리진 허용
+CORS(app, origins=[
+    "http://localhost:5173",      # Vite 개발 서버
+    "http://127.0.0.1:5173",      # 로컬호스트 대안
+    "http://localhost:3000",      # Create React App (대안)
+    "http://127.0.0.1:3000",      # 로컬호스트 대안
+], 
+supports_credentials=False,       # 쿠키 지원 비활성화 (보안상)
+allow_headers=[
+    'Content-Type', 
+    'Authorization',
+    'X-Requested-With',
+    'Accept',
+    'Origin'
+],
+methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+)
+
+# 요청 로깅 미들웨어
+@app.before_request
+def log_request_info():
+    """
+    모든 요청을 로깅합니다.
+    """
+    logger.info(f"요청: {request.method} {request.url}")
+    logger.info(f"헤더: {dict(request.headers)}")
+    if request.is_json:
+        logger.info(f"요청 본문: {request.get_json()}")
 
 # 프롬프트 최적화 엔진 초기화
 optimizer = PromptOptimizer()

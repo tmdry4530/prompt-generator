@@ -4,17 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "build:full": "tsc -b && vite build",
+    "dev": "cd frontend && vite",
+    "build": "cd frontend && vite build",
+    "build:full": "cd frontend && tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "test:watch": "vitest --watch",
-    "test:e2e": "playwright test"
+    "preview": "cd frontend && vite preview",
+    "test": "cd frontend && vitest",
+    "test:ui": "cd frontend && vitest --ui",
+    "test:run": "cd frontend && vitest run",
+    "test:coverage": "cd frontend && vitest run --coverage",
+    "test:watch": "cd frontend && vitest --watch",
+    "test:e2e": "cd frontend && playwright test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

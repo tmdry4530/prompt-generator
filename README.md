@@ -272,17 +272,9 @@ MIT License - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
 ## 👥 제작자
 
-- **개발자**: AI 프롬프트 최적화 전문가
-- **이메일**: contact@example.com
-- **프로젝트 링크**: https://github.com/your-repo/prompt-generator
-
-## 📞 지원
-
-문제가 발생하거나 제안사항이 있으시면:
-
-1. **GitHub Issues**: 버그 리포트 및 기능 요청
-2. **이메일**: 직접 문의
-3. **Wiki**: 상세한 사용법 및 FAQ
+- **개발자**: Chamdom
+- **이메일**: wjdtmdry9904@gmail.com
+- **프로젝트 링크**: https://github.com/tmdry4530/prompt-generator
 
 ---
 

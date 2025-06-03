@@ -140,58 +140,45 @@ function Wait-ForServer {
     
     Write-Info "Waiting for $ServerName to be ready at $Url..."
     $timeout = (Get-Date).AddSeconds($TimeoutSeconds)
+    $checkInterval = 2
     
     while ((Get-Date) -lt $timeout) {
         try {
-            # Use more robust HTTP client approach with clear HTTP protocol
             $uri = [Uri]$Url
             
-            # Ensure we're using HTTP, not HTTPS
-            if ($uri.Scheme -ne "http") {
-                $uri = New-Object System.Uri("http://$($uri.Host):$($uri.Port)$($uri.PathAndQuery)")
-                Write-Debug "Modified URL to ensure HTTP: $uri"
-            }
-            
-            # For frontend, just check if port is listening
+            # 프론트엔드의 경우 단순히 포트 연결 확인
             if ($ServerName -eq "Frontend") {
                 $tcpClient = New-Object System.Net.Sockets.TcpClient
                 try {
                     $tcpClient.Connect($uri.Host, $uri.Port)
                     if ($tcpClient.Connected) {
-                        $tcpClient.Close()
                         Write-Success "$ServerName is ready!"
                         return $true
                     }
                 } catch {
-                    Write-Debug "Frontend connection failed: $($_.Exception.Message)"
+                    # 연결 실패는 정상 (아직 준비되지 않음)
                 } finally {
                     if ($tcpClient) { $tcpClient.Close() }
                 }
             }
-            # For backend, try a full HTTP request to validate API
+            # 백엔드의 경우 HTTP 요청으로 Health Check
             else {
-                $request = [System.Net.WebRequest]::Create($uri)
-                $request.Method = "GET"
-                $request.Timeout = 5000
-                $request.UseDefaultCredentials = $true
-                
                 try {
-                    $response = $request.GetResponse()
+                    $response = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 3 -ErrorAction Stop
                     if ($response.StatusCode -eq 200) {
-                        $response.Close()
                         Write-Success "$ServerName is ready!"
                         return $true
                     }
-                    $response.Close()
                 } catch {
-                    Write-Debug "Backend HTTP request failed: $($_.Exception.Message)"
+                    # HTTP 요청 실패는 정상 (아직 준비되지 않음)
+                    Write-Debug "Backend health check failed: $($_.Exception.Message)"
                 }
             }
         } catch {
-            # Server not ready yet
-            Write-Debug "Server not ready: $($_.Exception.Message)"
+            Write-Debug "Server check failed: $($_.Exception.Message)"
         }
-        Start-Sleep -Seconds 2
+        
+        Start-Sleep -Seconds $checkInterval
     }
     
     Write-Error "$ServerName failed to start within $TimeoutSeconds seconds"

@@ -33,9 +33,10 @@ import {
   History,
   BarChart3,
 } from "lucide-react";
+import apiClient from "./services/api";
 
 // API 기본 URL
-const API_BASE = "/api";
+const API_BASE = "http://localhost:5001/api";
 
 // 모델 타입 정의
 interface ModelInfo {
@@ -102,8 +103,8 @@ function App() {
   // API 함수들
   const loadModels = async () => {
     try {
-      const response = await fetch(`${API_BASE}/models`);
-      const data = await response.json();
+      const response = await apiClient.get("/models");
+      const data = await response.data;
       setModels(data.model_details || {});
     } catch (err) {
       console.error("모델 정보 로드 실패:", err);
@@ -112,8 +113,8 @@ function App() {
 
   const loadExamples = async (model: string) => {
     try {
-      const response = await fetch(`${API_BASE}/examples/${model}`);
-      const data = await response.json();
+      const response = await apiClient.get(`/examples/${model}`);
+      const data = await response.data;
       setExamples(data.examples || []);
     } catch (err) {
       console.error("예시 로드 실패:", err);
@@ -143,8 +144,8 @@ function App() {
 
   const loadStats = async () => {
     try {
-      const response = await fetch(`${API_BASE}/stats`);
-      const data = await response.json();
+      const response = await apiClient.get("/stats");
+      const data = await response.data;
       setStats(data);
     } catch (err) {
       console.error("통계 로드 실패:", err);
@@ -163,18 +164,12 @@ function App() {
     setOptimizedResult(null);
 
     try {
-      const response = await fetch(`${API_BASE}/optimize`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: selectedModel,
-          task: userTask.trim(),
-        }),
+      const response = await apiClient.post("/optimize", {
+        model: selectedModel,
+        task: userTask.trim(),
       });
 
-      const data = await response.json();
+      const data = await response.data;
 
       if (!response.ok) {
         throw new Error(data.error || "최적화 실패");
