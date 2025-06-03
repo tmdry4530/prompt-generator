@@ -8,12 +8,10 @@ __author__ = "AI Prompt Optimizer Team"
 __description__ = "AI 모델별 프롬프트 최적화 도구의 백엔드 코드"
 
 # 주요 모듈들 import
-from . import models
 from . import services
 from . import utils
 
 __all__ = [
-    'models',
     'services', 
     'utils'
 ]
