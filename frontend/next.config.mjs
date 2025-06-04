@@ -16,8 +16,9 @@ const nextConfig = {
   },
   distDir: ".next",
   experimental: {
-    serverActions: true,
-    ppr: true,
+    serverActions: {
+      allowedOrigins: ["localhost:3000", "prompt-generator.vercel.app"],
+    },
   },
 };
 
