@@ -206,3 +206,15 @@
 2025-06-04 23:11:44,155 - werkzeug - INFO - 127.0.0.1 - - [04/Jun/2025 23:11:44] "[31m[1m\x16\x03\x01\x00õ\x01\x00\x00ñ\x03\x03\x17:¶h\x9b\x92\x1er\x88i§Õ é¶æ\x0b\x1aí\x96jí\x9b [&â¥.`Óq \x9c\x1bèpªø?3X}ÇÒ²=\x18<ì[0m" 400 -
 2025-06-04 23:13:35,725 - werkzeug - ERROR - 127.0.0.1 - - [04/Jun/2025 23:13:35] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
 2025-06-04 23:13:35,725 - werkzeug - INFO - 127.0.0.1 - - [04/Jun/2025 23:13:35] "[31m[1m\x16\x03\x01\x00õ\x01\x00\x00ñ\x03\x03OØ\x01}<»Bx5\x90j!]°|ÞíM·*\x8d9D\x96\x80{\x17ÜÍ\x90Tô Ój¿Ñç\x0e\x05.¹\x91ÿ´ÐbdC\x85U¸ò<ç¼\x0c\x092EÍIÌrH\x00\x12À+À/À,À0Ì©Ì¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -
+2025-06-05 00:58:06,063 - __main__ - INFO - 서버를 포트 5001에서 시작합니다.
+2025-06-05 00:58:06,064 - __main__ - INFO - 디버그 모드: True
+2025-06-05 00:58:06,099 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-06-05 00:58:06,099 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-05 00:58:06,101 - werkzeug - INFO -  * Restarting with stat
+2025-06-05 00:58:06,343 - __main__ - INFO - 서버를 포트 5001에서 시작합니다.
+2025-06-05 00:58:06,344 - __main__ - INFO - 디버그 모드: True
+2025-06-05 00:58:06,361 - werkzeug - WARNING -  * Debugger is active!
+2025-06-05 00:58:06,369 - werkzeug - INFO -  * Debugger PIN: 697-062-345
