@@ -169,9 +169,9 @@ function App() {
         task: userTask.trim(),
       });
 
-      const data = await response.data;
+      const data = response.data;
 
-      if (!response.ok) {
+      if (!response.data.success) {
         throw new Error(data.error || "최적화 실패");
       }
 

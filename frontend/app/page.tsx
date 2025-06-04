@@ -1,4 +1,4 @@
-import PromptGenerator from "@/components/prompt-generator";
+import PromptGenerator from "../components/prompt-generator";
 
 export default function Home() {
   return (

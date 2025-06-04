@@ -5,19 +5,22 @@ import axios from "axios";
 
 // 환경 변수에서 API 기본 URL 가져오기
 const getApiBaseUrl = () => {
-  // Vite 환경 변수 사용
-  if (import.meta.env.VITE_API_BASE_URL) {
-    return import.meta.env.VITE_API_BASE_URL;
+  // Next.js 환경 변수 사용
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
   }
 
   // 환경 변수가 없는 경우 배포 환경에서는 현재 호스트의 API를 사용
-  if (import.meta.env.PROD) {
-    // 현재 호스트 기반 API URL 생성 (동일 도메인 가정)
-    const protocol = window.location.protocol;
-    const hostname = window.location.hostname;
+  if (process.env.NODE_ENV === "production") {
+    // 브라우저 환경에서만 실행
+    if (typeof window !== "undefined") {
+      // 현재 호스트 기반 API URL 생성 (동일 도메인 가정)
+      const protocol = window.location.protocol;
+      const hostname = window.location.hostname;
 
-    // 프로덕션 환경에서는 동일 도메인의 /api 경로 사용
-    return `${protocol}//${hostname}/api`;
+      // 프로덕션 환경에서는 동일 도메인의 /api 경로 사용
+      return `${protocol}//${hostname}/api`;
+    }
   }
 
   // 개발 환경에서는 로컬 API 사용 (포트 5001로 변경)
