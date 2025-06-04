@@ -61,9 +61,11 @@ pnpm start
 
 Vercel 배포 시 다음과 같은 문제가 발생할 수 있습니다:
 
-1. **Next.js 감지 오류**: 
+1. **Next.js 감지 오류**:
+
    - 원인: `package.json`에서 Next.js가 devDependencies에 있을 경우
    - 해결: Next.js를 dependencies로 이동
+
    ```json
    "dependencies": {
      "next": "15.3.3",
@@ -72,12 +74,15 @@ Vercel 배포 시 다음과 같은 문제가 발생할 수 있습니다:
    ```
 
 2. **빌드 디렉토리 문제**:
+
    - 원인: `.next` 디렉토리가 GitHub에 포함되어 있을 경우
    - 해결: `.gitignore`에 `.next/` 추가 및 레포지토리에서 제거
 
 3. **package.json 누락 오류**:
+
    - 원인: `package.json` 파일이 삭제되거나 Git에 추가되지 않은 경우
    - 해결: `package.json` 파일을 복원하고 Git에 추가
+
    ```bash
    git add package.json
    git commit -m "Add package.json"
@@ -85,15 +90,17 @@ Vercel 배포 시 다음과 같은 문제가 발생할 수 있습니다:
    ```
 
 4. **실험적 기능 오류**:
+
    - 원인: `next.config.mjs`에 지원되지 않는 실험적 기능이 설정된 경우
    - 해결: 실험적 기능을 안정적인 버전에서 지원하는 옵션으로 수정
+
    ```javascript
    // 잘못된 설정
    experimental: {
      serverActions: true,
      ppr: true
    }
-   
+
    // 수정된 설정
    experimental: {
      serverActions: {
