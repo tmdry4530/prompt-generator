@@ -51,9 +51,31 @@ pnpm start
 {
   "buildCommand": "pnpm run build",
   "installCommand": "pnpm install --no-frozen-lockfile",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "cleanUrls": true
 }
 ```
+
+### Vercel 배포 문제 해결
+
+Vercel 배포 시 다음과 같은 문제가 발생할 수 있습니다:
+
+1. **Next.js 감지 오류**:
+
+   - 원인: `package.json`에서 Next.js가 devDependencies에 있을 경우
+   - 해결: Next.js를 dependencies로 이동
+
+   ```json
+   "dependencies": {
+     "next": "^15.3.3",
+     // 다른 의존성들...
+   }
+   ```
+
+2. **빌드 디렉토리 문제**:
+   - 원인: `.next` 디렉토리가 GitHub에 포함되어 있을 경우
+   - 해결: `.gitignore`에 `.next/` 추가 및 레포지토리에서 제거
 
 ## 프로젝트 구조
 
