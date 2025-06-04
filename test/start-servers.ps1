@@ -275,9 +275,9 @@ function Start-FrontendServer {
         
         # Determine command based on mode
         $command = switch ($Mode) {
-            "dev" { 
-                if ($Watch) { "npm run dev -- --host 0.0.0.0 --port $FrontendPort" }
-                else { "npm run dev -- --host 0.0.0.0 --port $FrontendPort" }
+            "dev" {
+                if ($Watch) { "npm run dev -- -H 0.0.0.0 -p $FrontendPort" }
+                else { "npm run dev -- -H 0.0.0.0 -p $FrontendPort" }
             }
             "build" { "npm run build" }
             "prod" {
@@ -288,9 +288,9 @@ function Start-FrontendServer {
                     Write-Error "Frontend build failed"
                     return $false
                 }
-                "npm run preview -- --host 0.0.0.0 --port $FrontendPort"
+                "npm run start -- -H 0.0.0.0 -p $FrontendPort"
             }
-            default { "npm run dev -- --host 0.0.0.0 --port $FrontendPort" }
+            default { "npm run dev -- -H 0.0.0.0 -p $FrontendPort" }
         }
         
         if ($Mode -eq "build") {
