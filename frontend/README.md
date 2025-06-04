@@ -68,14 +68,24 @@ Vercel 배포 시 다음과 같은 문제가 발생할 수 있습니다:
 
    ```json
    "dependencies": {
-     "next": "^15.3.3",
+     "next": "15.3.3",
      // 다른 의존성들...
    }
    ```
 
 2. **빌드 디렉토리 문제**:
+
    - 원인: `.next` 디렉토리가 GitHub에 포함되어 있을 경우
    - 해결: `.gitignore`에 `.next/` 추가 및 레포지토리에서 제거
+
+3. **package.json 누락 오류**:
+   - 원인: `package.json` 파일이 삭제되거나 Git에 추가되지 않은 경우
+   - 해결: `package.json` 파일을 복원하고 Git에 추가
+   ```bash
+   git add package.json
+   git commit -m "Add package.json"
+   git push
+   ```
 
 ## 프로젝트 구조
 
