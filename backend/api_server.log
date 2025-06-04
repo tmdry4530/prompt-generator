@@ -187,3 +187,22 @@
 2025-05-29 22:16:27,030 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 22:16:27] "[31m[1m\x16\x03\x01\x00õ\x01\x00\x00ñ\x03\x03ð*IÔZä\x99?\x0fL\x12GÏS×18SÜ#[0m" 400 -
 2025-05-29 22:18:23,619 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 22:18:23] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
 2025-05-29 22:18:23,619 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 22:18:23] "[31m[1m\x16\x03\x01\x00õ\x01\x00\x00ñ\x03\x03\x15ÿbº\x88\x0d¹¦³\x142k*=QÆ¿×O`ÑJá\x9a\x11×$îÓ\x93s~ ¤Á4Î\x8cLð$\x84Ô\x82×M\x08jï\x9c#aß\x16\x9bF\\.Îç/´\x12\x8b¦\x00\x12À+À/À,À0Ì©Ì¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -
+2025-06-04 23:10:57,338 - __main__ - INFO - 서버를 포트 5001에서 시작합니다.
+2025-06-04 23:10:57,339 - __main__ - INFO - 디버그 모드: True
+2025-06-04 23:10:57,378 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-06-04 23:10:57,378 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-04 23:10:57,380 - werkzeug - INFO -  * Restarting with stat
+2025-06-04 23:10:57,611 - __main__ - INFO - 서버를 포트 5001에서 시작합니다.
+2025-06-04 23:10:57,611 - __main__ - INFO - 디버그 모드: True
+2025-06-04 23:10:57,627 - werkzeug - WARNING -  * Debugger is active!
+2025-06-04 23:10:57,633 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-06-04 23:11:31,537 - __main__ - INFO - 요청: GET http://localhost:5001/api/health
+2025-06-04 23:11:31,537 - __main__ - INFO - 헤더: {'User-Agent': 'Mozilla/5.0 (Windows NT; Windows NT 10.0; ko-KR) WindowsPowerShell/5.1.26100.4061', 'Host': 'localhost:5001', 'Connection': 'Keep-Alive'}
+2025-06-04 23:11:31,538 - werkzeug - INFO - 127.0.0.1 - - [04/Jun/2025 23:11:31] "GET /api/health HTTP/1.1" 200 -
+2025-06-04 23:11:44,154 - werkzeug - ERROR - 127.0.0.1 - - [04/Jun/2025 23:11:44] code 400, message Bad request version ('\x9c\x1bèpªø?3X}ÇÒ²=\x18<ì')
+2025-06-04 23:11:44,155 - werkzeug - INFO - 127.0.0.1 - - [04/Jun/2025 23:11:44] "[31m[1m\x16\x03\x01\x00õ\x01\x00\x00ñ\x03\x03\x17:¶h\x9b\x92\x1er\x88i§Õ é¶æ\x0b\x1aí\x96jí\x9b [&â¥.`Óq \x9c\x1bèpªø?3X}ÇÒ²=\x18<ì[0m" 400 -
+2025-06-04 23:13:35,725 - werkzeug - ERROR - 127.0.0.1 - - [04/Jun/2025 23:13:35] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-06-04 23:13:35,725 - werkzeug - INFO - 127.0.0.1 - - [04/Jun/2025 23:13:35] "[31m[1m\x16\x03\x01\x00õ\x01\x00\x00ñ\x03\x03OØ\x01}<»Bx5\x90j!]°|ÞíM·*\x8d9D\x96\x80{\x17ÜÍ\x90Tô Ój¿Ñç\x0e\x05.¹\x91ÿ´ÐbdC\x85U¸ò<ç¼\x0c\x092EÍIÌrH\x00\x12À+À/À,À0Ì©Ì¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -
