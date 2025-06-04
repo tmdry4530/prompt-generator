@@ -42,12 +42,15 @@ cd prompt-generator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 # 서버 시작 (대화형 메뉴)
-.\start_server.ps1
+.\start-servers.ps1
 
 # 또는 직접 실행
-.\start_server.ps1 -Both    # Frontend + Backend 동시 시작
-.\start_server.ps1 -BackendOnly   # Backend만 시작
-.\start_server.ps1 -FrontendOnly  # Frontend만 시작
+.\start-servers.ps1               # Frontend + Backend 동시 시작 (개발 모드)
+.\start-servers.ps1 -Backend false # Frontend만 시작
+.\start-servers.ps1 -Frontend false # Backend만 시작
+
+# Linux/macOS 환경
+./start-servers.sh                 # 프론트엔드와 백엔드 동시 시작
 ```
 
 ### 3️⃣ 브라우저 접속
@@ -88,7 +91,8 @@ prompt-generator/
 │   │   ├── App.tsx         # 메인 React 컴포넌트
 │   │   └── components/     # UI 컴포넌트들
 │   └── package.json        # Node.js 의존성
-└── start_server.ps1        # 서버 시작 스크립트
+├── start-servers.ps1       # Windows용 서버 시작 스크립트
+└── start-servers.sh        # Linux/macOS용 서버 시작 스크립트
 ```
 
 ## 🔌 API 엔드포인트
