@@ -15,6 +15,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   distDir: ".next",
+  experimental: {
+    serverActions: true,
+    ppr: true,
+  },
 };
 
 export default nextConfig;

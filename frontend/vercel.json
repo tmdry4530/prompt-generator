@@ -3,5 +3,10 @@
   "installCommand": "pnpm install --no-frozen-lockfile",
   "framework": "nextjs",
   "outputDirectory": ".next",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "packageJson": {
+    "dependencies": {
+      "next": "15.3.3"
+    }
+  }
 }
