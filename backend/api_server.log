@@ -1,0 +1,189 @@
+2025-05-29 19:45:57,003 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.35.43:5000
+2025-05-29 19:45:57,003 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 19:45:57,004 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 19:45:57,222 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 19:45:57,229 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 19:48:43,372 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.35.43:5000
+2025-05-29 19:48:43,373 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 19:51:32,277 - werkzeug - INFO -  * Detected change in 'D:\\Develop\\prompt-generator\\backend\\src\\main.py', reloading
+2025-05-29 19:52:12,045 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.35.43:5000
+2025-05-29 19:52:12,045 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 19:52:12,046 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 19:52:12,267 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 19:52:12,274 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 19:53:03,935 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.35.43:5000
+2025-05-29 19:53:03,935 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 19:57:00,237 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.35.43:5000
+2025-05-29 19:57:00,238 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 19:57:00,238 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 19:57:00,454 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 19:57:00,459 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 19:57:40,025 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.35.43:5000
+2025-05-29 19:57:40,025 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 19:57:40,026 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 19:57:40,247 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 19:57:40,253 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 19:59:12,296 - werkzeug - INFO -  * Detected change in 'D:\\Develop\\prompt-generator\\backend\\src\\utils\\nlp_analyzer.py', reloading
+2025-05-29 20:04:06,778 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5000¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:04:06,778 - __main__ - INFO - µğ¹ö±× ¸ğµå: False
+2025-05-29 20:04:06,799 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.35.43:5000
+2025-05-29 20:04:06,799 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 20:13:39,810 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:13:39,810 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:13:39,837 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-05-29 20:13:39,838 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 20:13:39,838 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 20:13:40,050 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:13:40,050 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:13:40,066 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 20:13:40,072 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 20:31:10,376 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:31:10,376 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:31:10,403 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-05-29 20:31:10,403 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 20:31:10,404 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 20:31:10,615 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:31:10,616 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:31:10,631 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 20:31:10,637 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 20:31:17,598 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:31:17,598 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:31:17,626 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-05-29 20:31:17,626 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 20:31:17,627 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 20:31:17,837 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:31:17,837 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:31:17,853 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 20:31:17,858 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 20:40:03,101 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:40:03,101 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:40:03,128 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-05-29 20:40:03,129 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 20:40:03,129 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 20:40:03,339 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:40:03,339 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:40:03,354 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 20:40:03,360 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 20:40:21,420 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:40:21,420 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:40:21,452 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-05-29 20:40:21,453 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 20:40:21,453 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 20:40:21,660 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:40:21,660 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:40:21,676 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 20:40:21,682 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 20:48:42,595 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:48:42,595 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:48:42,628 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-05-29 20:48:42,628 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 20:48:42,629 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 20:48:42,834 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 20:48:42,835 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 20:48:42,851 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 20:48:42,857 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 21:02:44,983 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 21:02:44,983 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 21:02:45,010 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-05-29 21:02:45,010 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 21:02:45,012 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 21:02:45,218 - __main__ - INFO - ¼­¹ö¸¦ Æ÷Æ® 5001¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
+2025-05-29 21:02:45,218 - __main__ - INFO - µğ¹ö±× ¸ğµå: True
+2025-05-29 21:02:45,236 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 21:02:45,242 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 21:02:47,174 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:02:47] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 21:02:55,850 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:02:55] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 21:03:29,768 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:03:29] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 21:03:30,773 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:03:30] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 21:03:31,673 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:03:31] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 21:03:37,509 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:03:37] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 21:04:15,337 - werkzeug - INFO -  * Detected change in 'D:\\Develop\\prompt-generator\\backend\\src\\main.py', reloading
+2025-05-29 21:06:21,880 - __main__ - INFO - ì„œë²„ë¥¼ í¬íŠ¸ 5001ì—ì„œ ì‹œì‘í•©ë‹ˆë‹¤.
+2025-05-29 21:06:21,880 - __main__ - INFO - ë””ë²„ê·¸ ëª¨ë“œ: True
+2025-05-29 21:06:21,906 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-05-29 21:06:21,906 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 21:06:21,907 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 21:06:22,119 - __main__ - INFO - ì„œë²„ë¥¼ í¬íŠ¸ 5001ì—ì„œ ì‹œì‘í•©ë‹ˆë‹¤.
+2025-05-29 21:06:22,119 - __main__ - INFO - ë””ë²„ê·¸ ëª¨ë“œ: True
+2025-05-29 21:06:22,134 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 21:06:22,140 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 21:07:47,130 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:07:47] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 21:07:47,130 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 21:07:47] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03Â¯Ã….\x9cP\x0f%Â¶\x85uÃ¸Â¯\x9f\x95R\x11c(\x11q\x0e8ZÃ(\x1cÂ¿UÃ¼\x0b\x89\x00 \x8acP]GlÃ³yÂ¥m\x8d\x16\x14Ã®\x1eu}x\x15Â³\x8eh%Ãª.\x01fÃ¥Ã˜Â©ÃœÃ³\x00\x12Ã€+Ã€/Ã€,Ã€0ÃŒÂ©ÃŒÂ¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -
+2025-05-29 21:09:32,576 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:09:32] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 21:09:32,576 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 21:09:32] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03Ã­Ã‡Ã£\x122Â¥0#Â·\x94\x1bÂªÂ¹Â°\x81Â©\x95sÃ­\x83KvÂ |IrÃ­hÃÃ¯\x94o \x05&IÃ—\x92'ÃÃÃ’}q\x86\x19Ã†BÂ¾Ã‘ÂºÃ™AÃ§Ã m\x887@Ã›xÃ£Ã˜Â¢\x00\x12Ã€+Ã€/Ã€,Ã€0ÃŒÂ©ÃŒÂ¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -
+2025-05-29 21:11:23,930 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:11:23] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 21:11:23,930 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 21:11:23] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03\x0dÂ©Â M[\x0dÃšÂ¤\x0eÃ§)15Ã“\x8d\x89\x05Â±\x15GÃ‡ÃYZ\x0d\x14Â·Â±\x81Â¡aÂ° vÂ¡;\x0bMÂ²Â¹;\x92Â«Ã«@xÂ®Ã„\x02f\x87Vu\x0b\x96Â¨Â§Â«Ã¨\\|Ã¶\x83Â­\x81\x00\x12Ã€+Ã€/Ã€,Ã€0ÃŒÂ©ÃŒÂ¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -
+2025-05-29 21:13:10,983 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:13:10] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03^/sÂ¸Ji\x9d\x89Â§8Q\x01Ã–Ã”Ã†\x0eRÃŸmÃ\x14/\x16FÃ¯ÃŒm\x051Ã€Ã¸')
+2025-05-29 21:13:10,984 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 21:13:10] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03^/sÂ¸Ji\x9d\x89Â§8Q\x01Ã–Ã”Ã†\x0eRÃŸmÃ\x14/\x16FÃ¯ÃŒm\x051Ã€Ã¸  Â³Ãp"\x16t[0m" 400 -
+2025-05-29 21:15:12,634 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:15:12] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 21:15:12,634 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 21:15:12] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03JÃ€\x8fD\x1b]Ãš\x0e`Â©\x8buc\x92\\ÃÃ§\x0d3Ã®]\x18;VÂ¡Ã 8Ã’\x8f=tÃ‘ Ã 8Ã·pÃ¸V`\x0dÃ¦?c\x81h\x1fKÂ­Ã±Ã½\x12Ã’\x19BrÃ†ÃÂ·XÂ¨/2Â¡Â»\x00\x12Ã€+Ã€/Ã€,Ã€0ÃŒÂ©ÃŒÂ¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -
+2025-05-29 21:17:34,086 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 21:17:34] code 400, message Bad request version ('KdÃ¬\x17CÃ¼*Â¤Â¡Â»\x8d\x8a')
+2025-05-29 21:17:34,086 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 21:17:34] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03\x99mÃ‰'f.)N\x886Ãƒ\x07\x11Â£Z?saÂ­\x8aTÂ¤Ã»Â©Ã¸Ã•g\x11D2ÃŠ" \x06Â¶\x1eKdÃ¬\x17CÃ¼*Â¤Â¡Â»\x8d\x8a[0m" 400 -
+2025-05-29 22:09:43,337 - __main__ - INFO - ì„œë²„ë¥¼ í¬íŠ¸ 5001ì—ì„œ ì‹œì‘í•©ë‹ˆë‹¤.
+2025-05-29 22:09:43,337 - __main__ - INFO - ë””ë²„ê·¸ ëª¨ë“œ: True
+2025-05-29 22:09:43,364 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.35.43:5001
+2025-05-29 22:09:43,365 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 22:09:43,367 - werkzeug - INFO -  * Restarting with stat
+2025-05-29 22:09:43,574 - __main__ - INFO - ì„œë²„ë¥¼ í¬íŠ¸ 5001ì—ì„œ ì‹œì‘í•©ë‹ˆë‹¤.
+2025-05-29 22:09:43,575 - __main__ - INFO - ë””ë²„ê·¸ ëª¨ë“œ: True
+2025-05-29 22:09:43,590 - werkzeug - WARNING -  * Debugger is active!
+2025-05-29 22:09:43,596 - werkzeug - INFO -  * Debugger PIN: 697-062-345
+2025-05-29 22:09:57,935 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 22:09:57] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 22:09:57,936 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 22:09:57] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03Ã€Ã¸Cf{Â¯Ã¤:\x02Ã“Ã°a\x02\x1cÃ«\x1bF>\x00%Â¿Ã©Ã¯b;~ÃœÃ„Â¨[\x9f\x0e Ã€Ã¬MÂ¦\x18CxyÃ©Ã§Ã´\x1aT]gÃ¢xÂ 3\\R1Â¢Ã‚ÃÃ™\x13Â¨Â¼'\x0cÃ¸\x00\x12Ã€+Ã€/Ã€,Ã€0ÃŒÂ©ÃŒÂ¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -
+2025-05-29 22:10:17,586 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 22:10:17] "GET /api/health HTTP/1.1" 200 -
+2025-05-29 22:12:13,329 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 22:12:13] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 22:12:13,329 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 22:12:13] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03yÂ¦ÃÂ¸t2Ã²Ã¸Â·\x0c\x16{?9\x07&Â¥Ã¿Ã\x99Â²$+\x10-Ã²Ã±P#XÂ·Ãš iNÃŸÃ•Ã‰lÂ´\x9cÃš\x83\x0cÃ–\x7f\x87Ã´C;y%o9Ã„Ã»\x80Â¹Â¸Ãƒ\x01\x9dÂ¾$\x9c\x00\x12Ã€+Ã€/Ã€,Ã€0ÃŒÂ©ÃŒÂ¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -
+2025-05-29 22:14:22,326 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 22:14:22] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 22:14:22,326 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 22:14:22] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03ÂµOV\x14A\x8fÂ»\x1dÂªJÂºwÂ¸2\x9awÂºÂ¶LwÃ¡\x11oÃ¨Âµ=Ã€Ã¿*F\x98\x93 T\x95dÂ°Â¬Â¾\x17|Â§\x94ÂªÂ«Â¡\x9dÃ†\x18Ã²GRÃ†Â»Â¹jÃ¦zcÃ‚Âª\x87dÃ»Y\x00\x12Ã€+Ã€/Ã€,Ã€0ÃŒÂ©ÃŒÂ¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -
+2025-05-29 22:16:27,030 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 22:16:27] code 400, message Bad request syntax ('\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03Ã°*IÃ”ZÃ¤\x99?\x0fL\x12GÃSÃ—18SÃœ#')
+2025-05-29 22:16:27,030 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 22:16:27] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03Ã°*IÃ”ZÃ¤\x99?\x0fL\x12GÃSÃ—18SÃœ#[0m" 400 -
+2025-05-29 22:18:23,619 - werkzeug - ERROR - 127.0.0.1 - - [29/May/2025 22:18:23] code 400, message Bad request version ('localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+2025-05-29 22:18:23,619 - werkzeug - INFO - 127.0.0.1 - - [29/May/2025 22:18:23] "[31m[1m\x16\x03\x01\x00Ãµ\x01\x00\x00Ã±\x03\x03\x15Ã¿bÂº\x88\x0dÂ¹Â¦Â³\x142k*=QÃ†Â¿Ã—O`Ã‘JÃ¡\x9a\x11Ã—$Ã®Ã“\x93s~ Â¤Ã4Ã\x8cLÃ°$\x84Ã”\x82Ã—M\x08jÃ¯\x9c#aÃŸ\x16\x9bF\\.ÃÃ§/Â´\x12\x8bÂ¦\x00\x12Ã€+Ã€/Ã€,Ã€0ÃŒÂ©ÃŒÂ¨\x13\x01\x13\x02\x13\x03\x01\x00\x00\x96\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00[0m" 400 -

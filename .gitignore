@@ -23,8 +23,9 @@ yarn-error.log*
 pnpm-debug.log*
 
 # 빌드 결과물
-frontend/dist/
-frontend/build/
+# 배포를 위해 주석 처리 (배포 시 필요)
+# frontend/dist/
+# frontend/build/
 *.tsbuildinfo
 
 # 캐시 파일들
@@ -56,8 +57,7 @@ __pycache__/
 *$py.class
 *.so
 
-# 배포 관련
-build/
+# 배포 관련 - 일부 필요한 파일은 제외하지 않음
 develop-eggs/
 downloads/
 eggs/
@@ -177,8 +177,9 @@ tramp
 # -----------------------------------------------------------------------------
 # 로그 파일
 # -----------------------------------------------------------------------------
-logs/
-*.log
+# 로그 파일은 배포 시 필요할 수 있으므로 일부 제외
+# logs/
+# *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -200,9 +201,10 @@ lerna-debug.log*
 # -----------------------------------------------------------------------------
 # 데이터베이스 파일
 # -----------------------------------------------------------------------------
-*.db
-*.sqlite
-*.sqlite3
+# 개발용 DB는 제외하지만 필요한 DB 파일은 포함
+# *.db
+# *.sqlite
+# *.sqlite3
 instance/
 .webassets-cache
 
@@ -221,16 +223,16 @@ instance/
 # -----------------------------------------------------------------------------
 # AI/ML 관련 (모델 파일, 데이터셋 등)
 # -----------------------------------------------------------------------------
-# 대용량 모델 파일
-*.pkl
-*.h5
-*.hdf5
-*.model
-*.weights
-models/
-checkpoints/
-data/
-datasets/
+# 대용량 모델 파일은 제외하지만 작은 모델 파일은 포함
+# *.pkl
+# *.h5
+# *.hdf5
+# *.model
+# *.weights
+# models/
+# checkpoints/
+# data/
+# datasets/
 
 # -----------------------------------------------------------------------------
 # 테스트 결과 및 리포트
@@ -271,9 +273,38 @@ test_output/
 *.test.json
 experimental/
 
-# API 키 및 설정 파일
-config/secrets.py
-config/api_keys.json
+# API 키 및 설정 파일 - 배포에 필요한 설정 파일은 포함
+# config/secrets.py
+# config/api_keys.json
 
 # 문서 생성 관련
-docs/_build/ 
+docs/_build/
+
+# -----------------------------------------------------------------------------
+# 배포에 반드시 필요한 파일 포함하기 위한 예외 설정
+# -----------------------------------------------------------------------------
+# 배포에 필요한 파일 포함 
+!package.json
+!package-lock.json
+!tsconfig.json
+!pnpm-lock.yaml
+!yarn.lock
+!.eslintrc.js
+!.prettierrc
+!babel.config.js
+!next.config.js
+!vite.config.js
+!vercel.json
+!netlify.toml
+
+# 배포에 필요한 설정 파일 포함
+!backend/requirements.txt
+!backend/requirements_minimal.txt
+!backend/config/*.json
+!backend/config/*.yaml
+!backend/config/*.yml
+
+# 빌드 파일 포함
+!dist/
+!build/
+!public/ 
