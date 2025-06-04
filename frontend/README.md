@@ -34,14 +34,26 @@ pnpm start
 
 ## 배포
 
-이 프로젝트는 정적 사이트로 빌드됩니다 (`output: 'export'`). 빌드 결과물은 `dist` 디렉토리에 생성됩니다.
+### Vercel 배포 설정 (권장)
 
-### Vercel 배포 설정
+1. GitHub 레포지토리에 코드를 푸시합니다.
+2. Vercel 대시보드에서 프로젝트를 가져옵니다.
+3. 다음 설정으로 배포합니다:
+   - **프레임워크 프리셋**: Next.js
+   - **루트 디렉토리**: frontend
+   - **빌드 명령어**: pnpm run build
+   - **출력 디렉토리**: .next
+   - **환경 변수**: 필요한 API 키와 URL을 설정
 
-- **프레임워크 프리셋**: Next.js
-- **루트 디렉토리**: frontend
-- **빌드 명령어**: pnpm run build
-- **출력 디렉토리**: dist
+또는 `vercel.json` 파일에 다음 설정이 이미 포함되어 있습니다:
+
+```json
+{
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "framework": "nextjs"
+}
+```
 
 ## 프로젝트 구조
 
