@@ -279,3 +279,28 @@ MIT License - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 ---
 
 ⭐ 이 프로젝트가 도움이 되셨다면 Star를 눌러주세요!
+
+# 프롬프트 생성기 개발 환경
+
+## 실행 방법
+
+1. `run-dev.bat` 파일을 실행하거나
+2. PowerShell에서 `.\start-servers.ps1` 명령을 실행합니다.
+
+## 개발 환경 구성
+
+- 프론트엔드: Next.js (포트: 3000)
+- 백엔드: Flask (포트: 5001)
+
+## 필요 도구
+
+- Node.js 18 이상
+- Python 3.8 이상
+- pnpm (권장) 또는 npm
+
+## 환경 변수
+
+- FLASK_ENV: development
+- PORT: 5001
+- DEBUG: True
+- NEXT_PUBLIC_API_URL: http://localhost:5001/api
